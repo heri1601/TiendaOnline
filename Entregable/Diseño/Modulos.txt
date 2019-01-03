@@ -1,0 +1,23 @@
+Login
+CreateUser
+Administradores
+Tiendas
+Dueños
+Productos
+Inventarios
+Carrito
+Pagar  ?
+Categorias Mejor solo manejar como campo?
+
+
+
+una tienda en línea, 
+log in como usuario o dueño, 
+cómo dueño podrás hacer alta tiendas, 
+todos los productos de la tienda y tener un  inventario, 
+como usuario podrás hacer compras en una tienda y tendrás un carrito, 
+se podrá dar de alta nuevos usuarios o dueños.
+
+Como administrar las categorías. Solo se selecciona la etiqueta y se le pone un checkbox en caso de ser una nueva categoría.
+Voy a quitar las subcategorias
+
