@@ -49,7 +49,7 @@
 		<cfargument name="inImagen"     	type="any"  required="no" default="">
 		<cfargument name="inImagenName"     	type="any"  required="no" default="">
 	<cfscript>
-		
+		writeDump(arguments);
 		//Guardando Imagen en ruta local
 
 		var model=CreateObject("component","Administradores/Productos/Model");
