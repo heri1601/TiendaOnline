@@ -18,22 +18,19 @@
 	</cffunction>
 
 	<cffunction  name="registrar" access="remote">
-			<cfargument name="Nombre"   type="any">
-            <cfargument name="Edad"     type="any">
-            <!---<cfargument name="Estado"   type="any">--->
-            <cfargument name="Num_Tel"  type="any">
-            <cfargument name="Entidad"  type="any">
-            <!---<cfargument name="Pais"     type="any">--->
+		<cfargument name="inNombre"   		type="string" required="yes">
+		<cfargument name="inDescripcion"    type="string"  required="yes">
+		<cfargument name="inPrecio"     	type="string"  required="yes">
+		<cfargument name="inImagen"     	type="any"  required="yes">
 	<cfscript>
-	//writedump(arguments);
-	//FileCopy(archivo,"d:/cosa.txt");
-	var cnPersonal=CreateObject("component","Administradores/Productos/Model");
-	var pkEmpleado=cnPersonal.preRegistrar(Nombre,Edad,Num_Tel,Entidad);
-	//Para regresar Json
-	//writeoutput(SerializeJSON(pkEmpleado));//Puede sert así o fuera del cfscript como <cfoutput>#pkEmpleado#</cfoutput>
+		//writedump(arguments);
+		//FileCopy(archivo,"d:/cosa.txt");
+		//Guardando Imagen en ruta local
+
+		var cnPersonal=CreateObject("component","Administradores/Productos/Model");
+		var pkRegistro=cnPersonal.preRegistrar(inNombre,inDescripcion,inPrecio,'c:/file.jpg');
+		writeoutput(SerializeJSON(pkRegistro));
 	</cfscript>
-	<cfoutput>#SerializeJSON(pkEmpleado)#</cfoutput><!---Va a dar lo mismo por que el json de un numero es el mismo nmero--->
-	
 	</cffunction>
 
 	<cffunction  name="registrarExtranjero" access="remote">

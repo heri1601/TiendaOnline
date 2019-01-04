@@ -35,8 +35,8 @@
 <div class="text-center"><h3>Elementos registrados</h3></div>
   
 <cfoutput>
-    <!---<h2>El numero de registros en la tabla es de #Request.resultadoQuery.recordcount#</h2>--->
-    <!---<cfdump var=#resultadoQuery#>--->
+    <!---<h2>El numero de registros en la tabla es de #Request.registros.recordcount#</h2>--->
+    <!---<cfdump var=#registros#>--->
    
     <table class="hover order-column stripe ui celled table" id="myTable" style="width:100%"String>
     <thead>
@@ -54,19 +54,19 @@
     <cfloop from="1" to=#Request.registros.recordcount# index="i">
       <tr>
         <td>#i#</td>
-        <td>#Request.resultadoQuery['TPR_NOMBRE'][i]#</td>
+        <td>#Request.registros['TPR_NOMBRE'][i]#</td>
         <td>categoria</td>
-        <td>#Request.resultadoQuery['TPR_DESCRIPCION'][i]#</td>
-        <td>#Request.resultadoQuery['TPR_PRECIO'][i]#</td>
-        <td>#Request.resultadoQuery['TPR_FK_ESTADO'][i]#</td>
+        <td>#Request.registros['TPR_DESCRIPCION'][i]#</td>
+        <td>#Request.registros['TPR_PRECIO'][i]#</td>
+        <td>#Request.registros['TPR_FK_ESTADO'][i]#</td>
         <td>
             
-            <cfif #Request.resultadoQuery['ESTADO'][i]# EQ 1>
-            <button id= "myElimi" type="button" class="button" onclick="EliminarDatosRegistro(#Request.resultadoQuery['PK_REGISTRO'][i]#)"><img src="https://image.flaticon.com/icons/svg/61/61848.svg" style="width:25px"> </button>
-            <button id= "myOk" type="button" class="button" onclick="modificarDatosRegistro(#Request.resultadoQuery['PK_REGISTRO'][i]#)"><img src="https://image.flaticon.com/icons/svg/58/58679.svg" style="width:25px"></button>
-            <button id= "myUPDATE" type="button" class="button" onclick="obtenerDatosRegistro(#Request.resultadoQuery['PK_REGISTRO'][i]#)" ><img src="https://image.flaticon.com/icons/svg/54/54551.svg" style="width:25px"></button>
-            <cfelseif #Request.resultadoQuery['ESTADO'][i]# EQ 2> 
-            <button id= "myModal" type="button" class="button" onclick="myZoom(#Request.resultadoQuery['PK_REGISTRO'][i]#)" ><img src="https://images.vexels.com/media/users/3/143437/isolated/preview/390e394e1ea17f2b8361c8a16d88364e-lupa-icono-simple-by-vexels.png" style="width:25px"></button>
+            <cfif #Request.registros['TPR_FK_ESTADO'][i]# EQ 1>
+            <button id= "myElimi" type="button" class="button" onclick="EliminarDatosRegistro(#Request.registros['TPR_PK_PRODUCTO'][i]#)"><img src="https://image.flaticon.com/icons/svg/61/61848.svg" style="width:25px"> </button>
+            <button id= "myOk" type="button" class="button" onclick="modificarDatosRegistro(#Request.registros['TPR_PK_PRODUCTO'][i]#)"><img src="https://image.flaticon.com/icons/svg/58/58679.svg" style="width:25px"></button>
+            <button id= "myUPDATE" type="button" class="button" onclick="obtenerDatosRegistro(#Request.registros['TPR_PK_PRODUCTO'][i]#)" ><img src="https://image.flaticon.com/icons/svg/54/54551.svg" style="width:25px"></button>
+            <cfelseif #Request.registros['ESTADO'][i]# EQ 2> 
+            <button id= "myModal" type="button" class="button" onclick="myZoom(#Request.registros['TPR_PK_PRODUCTO'][i]#)" ><img src="https://images.vexels.com/media/users/3/143437/isolated/preview/390e394e1ea17f2b8361c8a16d88364e-lupa-icono-simple-by-vexels.png" style="width:25px"></button>
             </cfif>
             
         </td>

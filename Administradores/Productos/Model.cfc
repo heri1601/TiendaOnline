@@ -12,15 +12,14 @@
 	</cffunction>
 
 	<cffunction name="Registrar" access="remote">
-		<cfargument name="Nombre"   type="any">
-        <cfargument name="Edad"     type="any">
-        <cfargument name="Num_Tel"  type="any">
-        <cfargument name="Estado"   type="any">
-        <cfargument name="Entidad"  type="any">
-        <cfargument name="Pais"     type="any">
+		<cfargument name="inNombre"   		type="string" required="yes">
+		<cfargument name="inDescripcion"    type="string"  required="yes">
+		<cfargument name="inPrecio"     	type="string"  required="yes">
+		<cfargument name="inImagen"     	type="string"  required="yes">
 		<cfscript>
-            var daoPersonal =   CreateObject("component","Administradores/Productos/DAO");
-            daoPersonal.insertUserNacional(Nombre,Edad,Num_Tel,Estado,Entidad,Pais);
+            var dao =   CreateObject("component","Administradores/Productos/DAO");
+            var pkRegistro=dao.registrar(inNombre,inDescripcion,inPrecio,inImagen);
+            return pkRegistro;
 		</cfscript>
 	</cffunction>
 <!------------------------------------------------------------------------------------------->

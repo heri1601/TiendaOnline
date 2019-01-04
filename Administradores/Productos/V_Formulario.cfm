@@ -27,14 +27,14 @@
 	
 	<label class="control-label col-sm-2">Nombre:</label>
       <div class="form-group">          
-        <input id="Name" type="text" class="form-control" name="Nombre">
+        <input id="inNombre" type="text" class="form-control" name="inNombre">
       </div>
 	  
 	<p>
 	
 		<label class="control-label col-sm-2">Descripcion:</label>
       <div class="form-group">          
-        <input id="Edad" type="text" class="form-control" name="Edad">
+        <input id="inDescripcion" type="text" class="form-control" name="inDescripcion">
 		</div>
 
 	<p>

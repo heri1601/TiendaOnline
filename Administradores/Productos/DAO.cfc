@@ -1,21 +1,25 @@
 <cfcomponent>
-	<cffunction name="insertUserNacional" access="package">
-		<cfargument name="Nombre"					    type="string"	required="yes">
-		<cfargument name="Edad"							type="numeric"	required="yes">
-		<cfargument name="Num_Tel"					    type="numeric"	required="yes">
-		<cfargument name="Estado"					    type="numeric"	required="yes">
-		<cfargument name="Entidad"					    type="numeric"	required="yes">
-		<cfargument name="Pais"					    	type="numeric"	required="yes">
-		<cfstoredproc PROCEDURE="MYUSER.MYPACKAGE.NUEVO_EMPLEADO" datasource="myDataSource">
-				<cfprocparam value="#Nombre#" 					    cfsqltype="cf_sql_varchar" 	type="in">
-				<cfprocparam value="#Edad#" 						cfsqltype="cf_sql_number" 	type="in">
-				<cfprocparam value="#Num_Tel#" 				        cfsqltype="cf_sql_number" 	type="in">
-				<cfprocparam value="#Estado#" 				        cfsqltype="cf_sql_number" 	type="in">
-				<cfprocparam value="#Entidad#" 				        cfsqltype="cf_sql_number" 	type="in">
-				<cfprocparam value="#Pais#" 				        cfsqltype="cf_sql_number" 	type="in">
-				<cfprocparam variable="pkEmpleado"					cfsqltype="cf_sql_integer" 	type="out">
-		</cfstoredproc>
-		<cfreturn pkEmpleado>
+	<cffunction name="registrar" access="package">
+		<cfargument name="inNombre"   		type="string" required="yes">
+		<cfargument name="inDescripcion"    type="string"  required="yes">
+		<cfargument name="inPrecio"     	type="number"  required="yes">
+		<cfargument name="inImagen"     	type="string"  required="yes">
+		<cfscript>
+		</cfscript>
+		<cfquery  datasource="myDatasource" result="resultData">
+			INSERT INTO T_PRODUCTOS (
+			TPR_PK_PRODUCTO, TPR_NOMBRE, TPR_DESCRIPCION, 
+			TPR_PRECIO, TPR_IMAGEN, TPR_FK_ESTADO, 
+			TPR_FECHA_REGISTRO) 
+			VALUES ( 0,
+			'#inNombre#',
+			'#inDescripcion#',
+			'#inPrecio#',
+			'#inImagen#',
+			1,
+			sysdate )
+		</cfquery>
+		<cfreturn resultData.RECORDCOUNT>
 	</cffunction>
 /*----------------------------------------------------------------------------------------------------------------*/
 	<cffunction name="obtenerDatosRegistro" access="remote">
@@ -107,7 +111,7 @@ PK_REGISTRO='#arguments.pkRegistro#'
 			FROM TIENDAS.T_PRODUCTOS
 			WHERE 
 			TPR_FK_ESTADO>0
-
+			ORDER BY TPR_PK_PRODUCTO DESC
     </cfquery>
 	<cfreturn resultadoQuery>
 </cffunction>
