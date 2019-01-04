@@ -1,7 +1,46 @@
   <script>
     $(document).ready(function() {
         $('#myTable').DataTable();
+
+
+        $("#btnCancelar").click(function(){
+                        location.reload(true);
+                         });
     } );
+
+
+    function obtenerDatosRegistro(pkRegistro){
+        var myData = new FormData();
+        var miUrl='/Administradores/Productos/C_Productos.cfc'
+            myData.append("method","obtenerRegistro")
+			myData.append("pkRegistro",pkRegistro)
+            $.ajax({
+                url:miUrl,
+                type:"POST",
+				contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+    			processData: false, // NEEDED, DON'T OMIT THIS
+				data:myData,
+                complete: function (response) {
+                    var reposnseObject=eval("("+response.responseText+")");
+                    console.log(reposnseObject);
+
+                    $("#inNombre").val(reposnseObject.DATA[0][1])
+                    $("#inDescripcion").val(reposnseObject.DATA[0][2])
+                    $("#inPrecio").val(reposnseObject.DATA[0][3])
+                    $("#imgFile").val(reposnseObject.DATA[0][4])
+                    $("#inPkRegistro").val(reposnseObject.DATA[0][0])
+                    
+                    $("#myCancel").show();
+                    
+                },
+                error: function () {
+                    alert("Error, intentalo de nuevo");
+                },
+            });
+    }
+
+
+
 /*
 
 

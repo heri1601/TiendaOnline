@@ -33,14 +33,41 @@
 		var rutaImagen="d:/Productos/"&uuid&"-"&inImagenName;
 		FileCopy(inImagen,rutaImagen);
 		
-
 		var pkRegistro=model.Registrar(inNombre,inDescripcion,inPrecio,rutaImagen);
 		
-
 		if(pkRegistro>0)pkRegistro=1;
 		writeoutput(SerializeJSON(pkRegistro));
 	</cfscript>
 	</cffunction>
+
+
+	<cffunction  name="modificar" access="remote">
+		<cfargument name="inPkRegistro"   		type="string" required="yes">
+		<cfargument name="inNombre"   		type="string" required="yes">
+		<cfargument name="inDescripcion"    type="string"  required="yes">
+		<cfargument name="inPrecio"     	type="string"  required="yes">
+		<cfargument name="inImagen"     	type="any"  required="no" default="">
+		<cfargument name="inImagenName"     	type="any"  required="no" default="">
+	<cfscript>
+		
+		//Guardando Imagen en ruta local
+
+		var model=CreateObject("component","Administradores/Productos/Model");
+		var uuid=CreateUUID();
+		//Saving file in structured path
+		var rutaImagen='';
+		if(inImagenName!=''){
+			rutaImagen="d:/Productos/"&uuid&"-"&inImagenName;
+			FileCopy(inImagen,rutaImagen);
+		}
+		
+		var pkRegistro=model.modificar(inPkRegistro,inNombre,inDescripcion,inPrecio,rutaImagen);
+		
+		if(pkRegistro>0)pkRegistro=1;
+		writeoutput(SerializeJSON(pkRegistro));
+	</cfscript>
+	</cffunction>
+
 
 	<cffunction  name="registrarExtranjero" access="remote">
 			<cfargument name="Nombre"   type="any">

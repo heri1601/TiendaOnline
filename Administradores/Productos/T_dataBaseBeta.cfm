@@ -43,7 +43,6 @@
       <tr>
         <th>Num.</th>
         <th>Nombre</th>
-        <th>Categor&iacute;a</th>
         <th>Descripci&oacute;n</th>
         <th>Precio</th>
         <th>Imagen</th>     
@@ -56,7 +55,6 @@
       <tr>
         <td>#i#</td>
         <td>#Request.registros['TPR_NOMBRE'][i]#</td>
-        <td>categoria</td>
         <td>#Request.registros['TPR_DESCRIPCION'][i]#</td>
         <td>#Request.registros['TPR_PRECIO'][i]#</td>
         <cfset myImage=ImageNew("#Request.registros['TPR_IMAGEN'][i]#")> 

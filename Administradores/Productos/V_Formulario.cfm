@@ -67,15 +67,15 @@
 
 <!---------------------------------------------------------------------------------------------------------------->		
 			
-        <input type="hidden" id="inPkRegistro" name="pkRegistro" >
+        <input type="text" id="inPkRegistro" name="pkRegistro" >
     
 
    	<center>
 	   <p>
 	 
-	 <button id= "mySend" type="button"  class="btn btn-success">Guardar</button>
-	 <button id= "myModify" type="button" class="btn btn-success">Modificar</button>
-	 <button id= "myCancel" type="button" class="btn btn-success">Cancelar</button>
+	 <button id= "btnRegistrar" type="button"  class="btn btn-success">Guardar</button>
+	 <button id= "btnModificar" type="button" class="btn btn-success">Modificar</button>
+	 <button id= "btnCancelar" type="button" class="btn btn-success">Cancelar</button>
 	</center>
 	
 

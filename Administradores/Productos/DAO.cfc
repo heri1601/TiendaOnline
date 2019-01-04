@@ -30,6 +30,28 @@
 
 		<cfreturn resultData2.TPR_PK_PRODUCTO>
 	</cffunction>
+
+	<cffunction name="modificar" access="package">
+		<cfargument name="inPkRegistro"   		type="string" required="yes">
+		<cfargument name="inNombre"   		type="string" required="yes">
+		<cfargument name="inDescripcion"    type="string"  required="yes">
+		<cfargument name="inPrecio"     	type="number"  required="yes">
+		<cfargument name="inImagen"     	type="string"  required="yes">
+		<cfscript>
+		</cfscript>
+		<cfquery  datasource="myDatasource" result="resultData">
+			UPDATE  T_PRODUCTOS SET 
+			TPR_NOMBRE='#inNombre#',
+			TPR_DESCRIPCION='#inDescripcion#', 
+			TPR_PRECIO='#inPrecio#'
+			<cfif inImagen NEQ ''>
+			,TPR_IMAGEN='#inImagen#'
+			</cfif>
+			WHERE 
+			TPR_PK_PRODUCTO='#inPkRegistro#'
+		</cfquery>
+		<cfreturn resultData.RECORDCOUNT>
+	</cffunction>
 /*----------------------------------------------------------------------------------------------------------------*/
 	<cffunction name="obtenerDatosRegistro" access="remote">
 
@@ -95,20 +117,17 @@
 <!------------------------------------------------------------------------------------------->
 <cffunction name="obtenerDatosRegistro1" access="remote">
 		<cfargument name="pkRegistro"					    type="any"	required="yes">
-			<cfquery name="resultadoQuery" datasource="myDataSource">
+			<cfquery name="registro" datasource="myDataSource">
 		SELECT 
-            PK_REGISTRO, 
-            NOMBRE, 
-            EDAD, 
-            NUM_TEL,
-            ESTADO,
-			FK_ENTIDAD,
-			FK_PAIS
-FROM MYUSER.DATASCHOOL
-WHERE 
-PK_REGISTRO='#arguments.pkRegistro#'
+			TPR_PK_PRODUCTO, TPR_NOMBRE, TPR_DESCRIPCION, 
+			TPR_PRECIO, TPR_IMAGEN, TPR_FK_ESTADO, 
+			TPR_FECHA_REGISTRO
+			FROM TIENDAS.T_PRODUCTOS
+			WHERE 
+			TPR_FK_ESTADO>0 AND
+			TPR_PK_PRODUCTO='#pkRegistro#'
         </cfquery>
-	<cfreturn resultadoQuery>
+	<cfreturn registro>
 	</cffunction>
 <!------------------------------------------------------------------------------------------->
 <cffunction  name="obtenerRegistros">

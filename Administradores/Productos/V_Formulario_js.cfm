@@ -2,21 +2,26 @@
 	$(document).ready(function(){
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-		$("#mySend").click(function(){
+		$("#btnRegistrar").click(function(){
             
+			var txtPkregistro=$("#inPkRegistro").val();
             var txtNombre=$("#inNombre").val();
 			var txtDescripcion=$("#inDescripcion").val();
 			var txtPrecio=$("#inPrecio").val();
 
 			//Serializing data to be sent
 			var myData = new FormData();
-			myData.append("method","registrar")
+			if(txtPkregistro!='')myData.append("method","modificar")
+			else myData.append("method","registrar")
+			myData.append("inpkRegistro",txtPkregistro)
 			myData.append("inNombre",txtNombre)
 			myData.append("inDescripcion",txtDescripcion)
 			myData.append("inPrecio",txtPrecio)
-			inp=$("#inFile")[0].files[0]
-			myData.append("inImagen",inp,inp.name)
-			myData.append("inImagenName",inp.name)
+			if(txtPkregistro==''){
+				inp=$("#inFile")[0].files[0]
+				myData.append("inImagen",inp,inp.name)
+				myData.append("inImagenName",inp.name)
+				}
 			var url='/Administradores/Productos/C_Productos.cfc'
 		
 			$.ajax({
@@ -42,6 +47,8 @@
                     alert("Error de conexion. Por favor intentalo nuevamente.");
                 }
             });
+
+			
                  
              
         });	
