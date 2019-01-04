@@ -19,7 +19,16 @@
 			1,
 			sysdate )
 		</cfquery>
-		<cfreturn resultData.RECORDCOUNT>
+
+		<cfquery  datasource="myDatasource" name="resultData2">
+			SELECT 
+			TPR_PK_PRODUCTO
+			FROM TIENDAS.T_PRODUCTOS
+			WHERE 
+			ROWID='#resultData.GENERATEDKEY#'
+		</cfquery>
+
+		<cfreturn resultData2.TPR_PK_PRODUCTO>
 	</cffunction>
 /*----------------------------------------------------------------------------------------------------------------*/
 	<cffunction name="obtenerDatosRegistro" access="remote">

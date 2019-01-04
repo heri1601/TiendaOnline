@@ -16,6 +16,7 @@
 			myData.append("inPrecio",txtPrecio)
 			inp=$("#inFile")[0].files[0]
 			myData.append("inImagen",inp,inp.name)
+			myData.append("inImagenName",inp.name)
 			var url='/Administradores/Productos/C_Productos.cfc'
 		
 			$.ajax({

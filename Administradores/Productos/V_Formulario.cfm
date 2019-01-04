@@ -7,11 +7,13 @@
 	
 	<div class="">
   <div class="container text-center">
-    <font color=#000000 face="arial" size=5>
+    
+		<div class="text-center">
+		<img id="myIMG" src="/img/productIcon.png" style="width:70px">
+	<font color=#000000 face="arial" size=5>
     Registro de productos
     </font>   
-		<div class="text-center">
-	<img id="myIMG" src="/img/productIcon.png" style="width:70px">
+	
 	</div>
     <p>
   </div>

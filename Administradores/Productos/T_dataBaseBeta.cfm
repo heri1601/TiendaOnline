@@ -46,7 +46,8 @@
         <th>Categor&iacute;a</th>
         <th>Descripci&oacute;n</th>
         <th>Precio</th>
-        <th>Estado</th>     
+        <th>Imagen</th>     
+        <th>Estado</th> 
         <th>Acciones</th>  
       </tr>
     </thead>
@@ -58,6 +59,9 @@
         <td>categoria</td>
         <td>#Request.registros['TPR_DESCRIPCION'][i]#</td>
         <td>#Request.registros['TPR_PRECIO'][i]#</td>
+        <cfset myImage=ImageNew("#Request.registros['TPR_IMAGEN'][i]#")> 
+        <!---<cfset ImageResize(myImage,"30%","","blackman",2)>--->
+        <td> <cfimage source="#myImage#" action="writeToBrowser" width='40'></td>
         <td>#Request.registros['TPR_FK_ESTADO'][i]#</td>
         <td>
             

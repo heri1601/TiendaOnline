@@ -22,13 +22,22 @@
 		<cfargument name="inDescripcion"    type="string"  required="yes">
 		<cfargument name="inPrecio"     	type="string"  required="yes">
 		<cfargument name="inImagen"     	type="any"  required="yes">
+		<cfargument name="inImagenName"     	type="any"  required="yes">
 	<cfscript>
-		//writedump(arguments);
-		//FileCopy(archivo,"d:/cosa.txt");
+		
 		//Guardando Imagen en ruta local
 
-		var cnPersonal=CreateObject("component","Administradores/Productos/Model");
-		var pkRegistro=cnPersonal.preRegistrar(inNombre,inDescripcion,inPrecio,'c:/file.jpg');
+		var model=CreateObject("component","Administradores/Productos/Model");
+		var uuid=CreateUUID();
+		//Saving file in structured path
+		var rutaImagen="d:/Productos/"&uuid&"-"&inImagenName;
+		FileCopy(inImagen,rutaImagen);
+		
+
+		var pkRegistro=model.Registrar(inNombre,inDescripcion,inPrecio,rutaImagen);
+		
+
+		if(pkRegistro>0)pkRegistro=1;
 		writeoutput(SerializeJSON(pkRegistro));
 	</cfscript>
 	</cffunction>
