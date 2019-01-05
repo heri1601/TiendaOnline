@@ -2,7 +2,7 @@
 	<cffunction name="registrar" access="package">
 		<cfargument name="inNombre"   		type="string" required="yes">
 		<cfargument name="inDescripcion"    type="string"  required="yes">
-		<cfargument name="inPrecio"     	type="number"  required="yes">
+		<cfargument name="inPrecio"     	type="string"  required="yes">
 		<cfargument name="inImagen"     	type="string"  required="yes">
 		<cfscript>
 		</cfscript>
@@ -35,7 +35,7 @@
 		<cfargument name="inPkRegistro"   		type="string" required="yes">
 		<cfargument name="inNombre"   		type="string" required="yes">
 		<cfargument name="inDescripcion"    type="string"  required="yes">
-		<cfargument name="inPrecio"     	type="number"  required="yes">
+		<cfargument name="inPrecio"     	type="string"  required="yes">
 		<cfargument name="inImagen"     	type="string"  required="yes">
 		<cfscript>
 		</cfscript>
@@ -52,6 +52,20 @@
 		</cfquery>
 		<cfreturn resultData.RECORDCOUNT>
 	</cffunction>
+
+	<cffunction name="actualizarEstado" access="package">
+		<cfargument name="inPkRegistro"   		type="string" required="yes">
+		<cfargument name="inEstado"   		type="numeric" required="yes">
+		<cfscript>
+		</cfscript>
+		<cfquery  datasource="myDatasource" result="resultData">
+			UPDATE  T_PRODUCTOS SET 
+			TPR_FK_ESTADO='#inEstado#'
+			WHERE 
+			TPR_PK_PRODUCTO='#inPkRegistro#'
+		</cfquery>
+		<cfreturn resultData.RECORDCOUNT>
+	</cffunction>s
 /*----------------------------------------------------------------------------------------------------------------*/
 	<cffunction name="obtenerDatosRegistro" access="remote">
 

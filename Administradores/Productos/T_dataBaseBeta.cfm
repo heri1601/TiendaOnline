@@ -64,11 +64,12 @@
         <td>
             
             <cfif #Request.registros['TPR_FK_ESTADO'][i]# EQ 1>
-            <button id= "myElimi" type="button" class="button" onclick="EliminarDatosRegistro(#Request.registros['TPR_PK_PRODUCTO'][i]#)"><img src="https://image.flaticon.com/icons/svg/61/61848.svg" style="width:25px"> </button>
-            <button id= "myOk" type="button" class="button" onclick="modificarDatosRegistro(#Request.registros['TPR_PK_PRODUCTO'][i]#)"><img src="https://image.flaticon.com/icons/svg/58/58679.svg" style="width:25px"></button>
+            <button id= "myElimi" type="button" class="button" onclick="eliminar(#Request.registros['TPR_PK_PRODUCTO'][i]#)"><img src="https://image.flaticon.com/icons/svg/61/61848.svg" style="width:25px"> </button>
+            <button id= "myOk" type="button" class="button" onclick="validar(#Request.registros['TPR_PK_PRODUCTO'][i]#)"><img src="https://image.flaticon.com/icons/svg/58/58679.svg" style="width:25px"></button>
             <button id= "myUPDATE" type="button" class="button" onclick="obtenerDatosRegistro(#Request.registros['TPR_PK_PRODUCTO'][i]#)" ><img src="https://image.flaticon.com/icons/svg/54/54551.svg" style="width:25px"></button>
-            <cfelseif #Request.registros['ESTADO'][i]# EQ 2> 
+            <cfelseif #Request.registros['TPR_FK_ESTADO'][i]# EQ 2> 
             <button id= "myModal" type="button" class="button" onclick="myZoom(#Request.registros['TPR_PK_PRODUCTO'][i]#)" ><img src="https://images.vexels.com/media/users/3/143437/isolated/preview/390e394e1ea17f2b8361c8a16d88364e-lupa-icono-simple-by-vexels.png" style="width:25px"></button>
+            <button id= "myModal" type="button" class="button" onclick="invalidar(#Request.registros['TPR_PK_PRODUCTO'][i]#)" ><img src="https://cdn4.iconfinder.com/data/icons/proglyphs-files-and-folders/512/Visibility_Hidden-512.png" style="width:25px"></button>
             </cfif>
             
         </td>

@@ -3,9 +3,7 @@
         $('#myTable').DataTable();
 
 
-        $("#btnCancelar").click(function(){
-                        location.reload(true);
-                         });
+        
     } );
 
 
@@ -32,6 +30,84 @@
                     
                     $("#myCancel").show();
                     
+                },
+                error: function () {
+                    alert("Error, intentalo de nuevo");
+                },
+            });
+    }
+
+    function eliminar(pkRegistro){
+        var myData = new FormData();
+        var miUrl='/Administradores/Productos/C_Productos.cfc'
+            myData.append("method","eliminar")
+			myData.append("inPkRegistro",pkRegistro)
+            $.ajax({
+                url:miUrl,
+                type:"POST",
+				contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+    			processData: false, // NEEDED, DON'T OMIT THIS
+				data:myData,
+                complete: function (response) {
+                    var reposnseObject=eval("("+response.responseText+")");
+                    if(reposnseObject=="1"){
+                        alert("Registro eliminado correctamente");
+                        location.reload(true);
+                    }else{
+                        alert("Error, por favor intentelo de nuevo");
+                    }
+                },
+                error: function () {
+                    alert("Error, intentalo de nuevo");
+                },
+            });
+    }
+
+    function validar(pkRegistro){
+        var myData = new FormData();
+        var miUrl='/Administradores/Productos/C_Productos.cfc'
+            myData.append("method","validar")
+			myData.append("inPkRegistro",pkRegistro)
+            $.ajax({
+                url:miUrl,
+                type:"POST",
+				contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+    			processData: false, // NEEDED, DON'T OMIT THIS
+				data:myData,
+                complete: function (response) {
+                    var reposnseObject=eval("("+response.responseText+")");
+                    if(reposnseObject=="1"){
+                        alert("Registro validado correctamente");
+                        location.reload(true);
+                    }else{
+                        alert("Error, por favor intentelo de nuevo");
+                    }
+                },
+                error: function () {
+                    alert("Error, intentalo de nuevo");
+                },
+            });
+    }
+
+    function invalidar(pkRegistro){
+        var myData = new FormData();
+        var miUrl='/Administradores/Productos/C_Productos.cfc'
+            myData.append("method","invalidar")
+			myData.append("inPkRegistro",pkRegistro)
+            $.ajax({
+                url:miUrl,
+                type:"POST",
+				contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+    			processData: false, // NEEDED, DON'T OMIT THIS
+				data:myData,
+                complete: function (response) {
+                    var reposnseObject=eval("("+response.responseText+")");
+                    if(reposnseObject=="1"){
+                        alert("Registro invalidado correctamente");
+                        location.reload(true);
+                    }else{
+                        alert("Error, por favor intentelo de nuevo");
+                    }
                 },
                 error: function () {
                     alert("Error, intentalo de nuevo");

@@ -2,8 +2,11 @@
 	$(document).ready(function(){
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+		$("#btnCancelar").click(function(){
+                        $("#myForm").trigger("reset");
+                         });
+
 		$("#btnRegistrar").click(function(){
-            
 			var txtPkregistro=$("#inPkRegistro").val();
             var txtNombre=$("#inNombre").val();
 			var txtDescripcion=$("#inDescripcion").val();
@@ -17,7 +20,9 @@
 			myData.append("inNombre",txtNombre)
 			myData.append("inDescripcion",txtDescripcion)
 			myData.append("inPrecio",txtPrecio)
-			if(txtPkregistro==''){
+			inp=$("#inFile")[0].files[0]
+			console.log(inp)
+			if(inp!=undefined){
 				inp=$("#inFile")[0].files[0]
 				myData.append("inImagen",inp,inp.name)
 				myData.append("inImagenName",inp.name)

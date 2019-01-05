@@ -49,9 +49,7 @@
 		<cfargument name="inImagen"     	type="any"  required="no" default="">
 		<cfargument name="inImagenName"     	type="any"  required="no" default="">
 	<cfscript>
-		writeDump(arguments);
 		//Guardando Imagen en ruta local
-
 		var model=CreateObject("component","Administradores/Productos/Model");
 		var uuid=CreateUUID();
 		//Saving file in structured path
@@ -63,6 +61,40 @@
 		
 		var pkRegistro=model.modificar(inPkRegistro,inNombre,inDescripcion,inPrecio,rutaImagen);
 		
+		if(pkRegistro>0)pkRegistro=1;
+		writeoutput(SerializeJSON(pkRegistro));
+	</cfscript>
+	</cffunction>
+	
+
+	<cffunction  name="eliminar" access="remote">
+		<cfargument name="inPkRegistro"   		type="string" required="yes">
+	<cfscript>
+		//Guardando Imagen en ruta local
+		var model=CreateObject("component","Administradores/Productos/Model");
+		var pkRegistro=model.eliminar(inPkRegistro);
+		if(pkRegistro>0)pkRegistro=1;
+		writeoutput(SerializeJSON(pkRegistro));
+	</cfscript>
+	</cffunction>
+
+	<cffunction  name="validar" access="remote">
+		<cfargument name="inPkRegistro"   		type="string" required="yes">
+	<cfscript>
+		//Guardando Imagen en ruta local
+		var model=CreateObject("component","Administradores/Productos/Model");
+		var pkRegistro=model.validar(inPkRegistro);
+		if(pkRegistro>0)pkRegistro=1;
+		writeoutput(SerializeJSON(pkRegistro));
+	</cfscript>
+	</cffunction>
+
+	<cffunction  name="invalidar" access="remote">
+		<cfargument name="inPkRegistro"   		type="string" required="yes">
+	<cfscript>
+		//Guardando Imagen en ruta local
+		var model=CreateObject("component","Administradores/Productos/Model");
+		var pkRegistro=model.invalidar(inPkRegistro);
 		if(pkRegistro>0)pkRegistro=1;
 		writeoutput(SerializeJSON(pkRegistro));
 	</cfscript>

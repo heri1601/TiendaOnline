@@ -35,6 +35,33 @@
             return pkRegistro;
 		</cfscript>
 	</cffunction>
+
+    <cffunction name="eliminar" access="remote">
+        <cfargument name="inPkRegistro"   		type="string" required="yes">
+		<cfscript>
+            var dao =   CreateObject("component","Administradores/Productos/DAO");
+            var pkRegistro=dao.actualizarEstado(inPkRegistro,0);
+            return pkRegistro;
+		</cfscript>
+	</cffunction>
+
+    <cffunction name="validar" access="remote">
+        <cfargument name="inPkRegistro"   		type="string" required="yes">
+		<cfscript>
+            var dao =   CreateObject("component","Administradores/Productos/DAO");
+            var pkRegistro=dao.actualizarEstado(inPkRegistro,2);
+            return pkRegistro;
+		</cfscript>
+	</cffunction>
+
+    <cffunction name="invalidar" access="remote">
+        <cfargument name="inPkRegistro"   		type="string" required="yes">
+		<cfscript>
+            var dao =   CreateObject("component","Administradores/Productos/DAO");
+            var pkRegistro=dao.actualizarEstado(inPkRegistro,3);
+            return pkRegistro;
+		</cfscript>
+	</cffunction>
 <!------------------------------------------------------------------------------------------->
 	<cffunction name="preRegistrarExtranjero" access="remote">
 		<cfargument name="Nombre"   type="any">
@@ -99,12 +126,7 @@
         </cfscript>
     </cffunction>
 <!------------------------------------------------------------------------------------------->
-    <cffunction  name="validar">
-        <cfargument name="pkRegistro"   type="any">
-	    <cfscript>
-            return actualizarEstado(pkRegistro,2);
-        </cfscript>
-    </cffunction>
+    
 
     <cffunction  name="actualizarEstado">
         <cfargument name="pkRegistro"   type="any">
