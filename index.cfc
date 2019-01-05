@@ -41,4 +41,49 @@
     <cfinclude template="/shop.cfm">
     </cffunction>
 
+    <cffunction name="addToCart" access="remote">
+    <cfargument name="p" type="string" required="no" default="">
+    <cfscript>
+        Session.cartProduct=cgi.HTTP_REFERER;
+        if(isDefined("Session.usuario") EQ False){
+            //writeoutput("redirect");
+            writeoutput(SerializeJSON("redirect"));
+        }
+    </cfscript>
+    </cffunction>
+
+    <cffunction name="login" access="remote">
+    <cfscript>
+        include "login.cfm";
+    </cfscript>
+    </cffunction>
+
+    <cffunction name="loginCheck" access="remote">
+    <cfargument name="e" type="string" required="no" default="">
+    <cfargument name="p" type="string" required="no" default="">
+    <cfscript>
+        //writedump(arguments);
+        if(e=="heri1601@gmail.com"&&p=="123"){
+            writeoutput(SerializeJSON("accept"));
+        }
+        else{
+            writeoutput(SerializeJSON("bad"));
+        }
+    </cfscript>
+    </cffunction>
+
+    <cffunction name="goProduct" access="remote">
+    <cfargument name="e" type="string" required="no" default="">
+    <cfargument name="p" type="string" required="no" default="">
+    <cfscript>
+        //writedump(arguments);
+        if(e=="heri1601@gmail.com"&&p=="123"){
+            writeoutput(SerializeJSON("accept"));
+        }
+        else{
+            writeoutput(SerializeJSON("bad"));
+        }
+    </cfscript>
+    </cffunction>
+
 </cfcomponent>

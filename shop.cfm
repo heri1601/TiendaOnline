@@ -18,7 +18,14 @@
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
 
+    <link href="/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery/jquery-2.2.4.min.js"></script>
+
+    <cfinclude template="shop_js.cfm">
 </head>
+
+
 
 <body>
     <!-- Search Wrapper Area Start -->
@@ -274,7 +281,10 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div>
                                     <div class="cart">
-                                        <a href="cart.html" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
+                                        <!---/index.cfc?method=addToCart&p=#Request.productos.TPR_PK_PRODUCTO[i]#     <a href="cart.html" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>--->
+                                        <cfoutput>
+                                        <a href="javascript:addToCart(#Request.productos.TPR_PK_PRODUCTO[i]#);" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
+                                        </cfoutput>
                                     </div>
                                 </div>
                             </div>

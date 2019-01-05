@@ -229,4 +229,23 @@ ORDER BY PK_ENTIDAD ASC
 </cffunction>
 
 
+<cffunction name="addToCart" access="package">
+		<cfargument name="pkProducto"   		type="string" required="yes">
+		<cfscript>
+		</cfscript>
+		<cfquery  datasource="myDatasource" result="resultData">
+			INSERT INTO T_PRODUCTOS (
+			TPR_PK_PRODUCTO, TPR_NOMBRE, TPR_DESCRIPCION, 
+			TPR_PRECIO, TPR_IMAGEN, TPR_FK_ESTADO, 
+			TPR_FECHA_REGISTRO) 
+			VALUES ( 0,
+			'#inNombre#',
+			'#inDescripcion#',
+			'#inPrecio#',
+			'#inImagen#',
+			1,
+			sysdate )
+		</cfquery>
+</cffunction>
+
 </cfcomponent>
