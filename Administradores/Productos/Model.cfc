@@ -96,28 +96,30 @@
             daoPersonal.actualizarDatosRegistro(Pk_registro,Nombre,Edad,Num_Tel,Entidad,0);
 		</cfscript>
 	</cffunction>
-<!------------------------------------------------------------------------------------------->
+
     <cffunction  name="obtenerRegistros">
         <cfscript>
             var daoPersonal=CreateObject("component","Administradores/Productos/DAO");
             return daoPersonal.obtenerRegistros();
         </cfscript>
     </cffunction>
-<!------------------------------------------------------------------------------------------->
-    <cffunction  name="obtenerEntidades">
-	    <cfscript>
-            var daoPersonalEntidad=CreateObject("component","Administradores/Productos/DAO");
-            return daoPersonalEntidad.obtenerEntidades();
-        </cfscript>
-    </cffunction>
-<!------------------------------------------------------------------------------------------->
-    <cffunction  name="obtenerPaises">
+
+
+    <cffunction  name="obtenerRegistrosFiltrado">
+    <cfargument name="categoria" type="string" required="yes">
+    <cfargument name="minPrecio" type="string" required="no" default="">
+    <cfargument name="maxPrecio" type="string" required="no" default="">
         <cfscript>
-            var daoPersonalPais=CreateObject("component","Administradores/Productos/DAO");
-            return daoPersonalPais.obtenerPaises();
+            var daoPersonal=CreateObject("component","Administradores/Productos/DAO");
+            return daoPersonal.obtenerProductosTienda(
+                categoria=arguments.categoria,
+                minPrecio=arguments.minPrecio,
+                maxPrecio=arguments.maxPrecio
+                );
         </cfscript>
     </cffunction>
-<!------------------------------------------------------------------------------------------->
+
+
     <cffunction  name="obtenerRegistro">
         <cfargument name="pkRegistro"   type="any">
 	    <cfscript>

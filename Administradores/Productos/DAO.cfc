@@ -28,6 +28,17 @@
 			ROWID='#resultData.GENERATEDKEY#'
 		</cfquery>
 
+		<!---Adding a default category--->
+		<cfquery  datasource="myDatasource" result="resultData">
+			INSERT INTO TIENDAS.T_CATEGORIAS_PRODUCTOS (
+			TCP_PK_CATEGORIA_PRODUCTO, TCP_FK_CATEGORIA, TCP_FK_PRODUCTO, 
+			TCP_FK_ESTADO) 
+			VALUES ( 0,
+			9,
+			#resultData2.TPR_PK_PRODUCTO#,
+			2)
+		</cfquery>
+
 		<cfreturn resultData2.TPR_PK_PRODUCTO>
 	</cffunction>
 
@@ -185,17 +196,37 @@ ORDER BY PK_ENTIDAD ASC
 	<cfreturn resultadoQuery>
 </cffunction>
 
-/*-----------------------------------------------------------------------------------------------------------------------*/
 
-<cffunction  name="obtenerPaises" access="remote">
-	<cfquery name="resultadoQuery" datasource="myDataSource">
-SELECT PK_PAIS,
-		PAIS
-	FROM MYUSER.C_PAIS
-	ORDER BY PK_PAIS ASC
-        </cfquery>
+<cffunction  name="obtenerProductosTienda">
+	<cfargument name="categoria" type="string" required="yes">
+    <cfargument name="minPrecio" type="string" required="no" default="">
+    <cfargument name="maxPrecio" type="string" required="no" default="">
+		<cfquery name="resultadoQuery" datasource="myDataSource">
+		SELECT 
+			PRO.TPR_PK_PRODUCTO, 
+			PRO.TPR_NOMBRE, 
+			PRO.TPR_DESCRIPCION, 
+			TO_CHAR(PRO.TPR_PRECIO,'9999999.99') TPR_PRECIO, 
+			PRO.TPR_IMAGEN, 
+			PRO.TPR_FK_ESTADO, 
+			PRO.TPR_FECHA_REGISTRO
+			FROM TIENDAS.T_PRODUCTOS PRO, TIENDAS.T_CATEGORIAS_PRODUCTOS CPR
+			WHERE 
+			PRO.TPR_FK_ESTADO=2 AND
+			CPR.TCP_FK_ESTADO=2 AND
+			CPR.TCP_FK_PRODUCTO=PRO.TPR_PK_PRODUCTO AND
+			CPR.TCP_FK_CATEGORIA='#categoria#' 
+			<cfif minPrecio NEQ "">
+				AND PRO.TPR_PRECIO>='#minPrecio#'
+			</cfif>
+			<cfif maxPrecio NEQ "">
+				AND PRO.TPR_PRECIO<='#maxPrecio#'
+			</cfif>
+
+			ORDER BY TPR_PK_PRODUCTO DESC
+    </cfquery>
 	<cfreturn resultadoQuery>
 </cffunction>
-/*-----------------------------------------------------------------------------------------------------------------------*/
+
 
 </cfcomponent>
