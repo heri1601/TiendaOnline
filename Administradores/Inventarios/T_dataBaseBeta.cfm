@@ -42,7 +42,9 @@
     <thead>
       <tr>
         <th>Num.</th>
-        <th>Nombre</th>
+        <th>Tienda</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
         <th>Descripci&oacute;n</th>     
         <th>Estado</th> 
         <th>Acciones</th>  
@@ -52,7 +54,9 @@
     <cfloop from="1" to=#Request.registros.recordcount# index="i">
       <tr>
         <td>#i#</td>
-        <td>#Request.registros['NOMBRE'][i]#</td>
+        <td>#Request.registros['NOMBRE_TIENDA'][i]#</td>
+        <td>#Request.registros['NOMBRE_PRODUCTO'][i]#</td>
+        <td>#Request.registros['CANTIDAD'][i]#</td>
         <td>#Request.registros['DESCRIPCION'][i]#</td>
         <td>#Request.registros['ESTADO'][i]#</td>
         <td>

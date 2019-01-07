@@ -9,7 +9,7 @@
 
     function obtenerDatosRegistro(pkRegistro){
         var myData = new FormData();
-        var miUrl='/Administradores/Categorias/C_Categorias.cfc'
+        var miUrl='/Administradores/Inventarios/C_Inventarios.cfc'
             myData.append("method","obtenerRegistro")
 			myData.append("pkRegistro",pkRegistro)
             $.ajax({
@@ -22,10 +22,10 @@
                     var reposnseObject=eval("("+response.responseText+")");
                     console.log(reposnseObject);
 
-                    $("#inNombre").val(reposnseObject.DATA[0][1])
-                    $("#inDescripcion").val(reposnseObject.DATA[0][2])
-                    $("#inPrecio").val(reposnseObject.DATA[0][3])
-                    $("#imgFile").val(reposnseObject.DATA[0][4])
+                    $("#inTienda").val(reposnseObject.DATA[0][1])
+                    $("#inProducto").val(reposnseObject.DATA[0][2])
+                    $("#inCantidad").val(reposnseObject.DATA[0][3])
+                    $("#inDescripcion").val(reposnseObject.DATA[0][4])
                     $("#inPkRegistro").val(reposnseObject.DATA[0][0])
                     
                     $("#myCancel").show();
@@ -39,7 +39,7 @@
 
     function eliminar(pkRegistro){
         var myData = new FormData();
-        var miUrl='/Administradores/Categorias/C_Categorias.cfc'
+        var miUrl='/Administradores/Inventarios/C_Inventarios.cfc'
             myData.append("method","eliminar")
 			myData.append("inPkRegistro",pkRegistro)
             $.ajax({
@@ -65,7 +65,7 @@
 
     function validar(pkRegistro){
         var myData = new FormData();
-        var miUrl='/Administradores/Categorias/C_Categorias.cfc'
+        var miUrl='/Administradores/Inventarios/C_Inventarios.cfc'
             myData.append("method","validar")
 			myData.append("inPkRegistro",pkRegistro)
             $.ajax({
@@ -91,7 +91,7 @@
 
     function invalidar(pkRegistro){
         var myData = new FormData();
-        var miUrl='/Administradores/Categorias/C_Categorias.cfc'
+        var miUrl='/Administradores/Inventarios/C_Inventarios.cfc'
             myData.append("method","invalidar")
 			myData.append("inPkRegistro",pkRegistro)
             $.ajax({

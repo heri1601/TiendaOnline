@@ -8,7 +8,9 @@
 
 		$("#btnRegistrar").click(function(){
 			var txtPkregistro=$("#inPkRegistro").val();
-            var txtNombre=$("#inNombre").val();
+            var txtTienda=$("#inTienda").val();
+			var txtProducto=$("#inProducto").val();
+			var txtCantidad=$("#inCantidad").val();
 			var txtDescripcion=$("#inDescripcion").val();
 
 			//Serializing data to be sent
@@ -16,10 +18,12 @@
 			if(txtPkregistro!='')myData.append("method","modificar")
 			else myData.append("method","registrar")
 			myData.append("inpkRegistro",txtPkregistro)
-			myData.append("inNombre",txtNombre)
+			myData.append("inTienda",txtTienda)
+			myData.append("inProducto",txtProducto)
+			myData.append("inCantidad",txtCantidad)
 			myData.append("inDescripcion",txtDescripcion)
 			
-			var url='/Administradores/Categorias/C_Categorias.cfc'
+			var url='/Administradores/Inventarios/C_Inventarios.cfc'
 		
 			$.ajax({
                 url:url,

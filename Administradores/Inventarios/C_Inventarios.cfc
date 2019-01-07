@@ -18,11 +18,13 @@
 	</cffunction>
 
 	<cffunction  name="registrar" access="remote">
-		<cfargument name="inNombre"   		type="string" required="yes">
+		<cfargument name="inTienda"   		type="string" required="yes">
+		<cfargument name="inProducto"   		type="string" required="yes">
+		<cfargument name="inCantidad"   		type="string" required="yes">
 		<cfargument name="inDescripcion"    type="string"  required="yes">
 	<cfscript>
 		var model=CreateObject("component","Administradores/Inventarios/Model");
-		var pkRegistro=model.Registrar(inNombre,inDescripcion);
+		var pkRegistro=model.Registrar(inTienda,inProducto,inCantidad,inDescripcion);
 		if(pkRegistro>0)pkRegistro=1;
 		writeoutput(SerializeJSON(pkRegistro));
 	</cfscript>
@@ -31,11 +33,13 @@
 
 	<cffunction  name="modificar" access="remote">
 		<cfargument name="inPkRegistro"   		type="string" required="yes">
-		<cfargument name="inNombre"   		type="string" required="yes">
+		<cfargument name="inTienda"   		type="string" required="yes">
+		<cfargument name="inProducto"   		type="string" required="yes">
+		<cfargument name="inCantidad"   		type="string" required="yes">
 		<cfargument name="inDescripcion"    type="string"  required="yes">
 	<cfscript>
 		var model=CreateObject("component","Administradores/Inventarios/Model");
-		var pkRegistro=model.modificar(inPkRegistro,inNombre,inDescripcion);
+		var pkRegistro=model.modificar(inPkRegistro,inTienda,inProducto,inCantidad,inDescripcion);
 		if(pkRegistro>0)pkRegistro=1;
 		writeoutput(SerializeJSON(pkRegistro));
 	</cfscript>
