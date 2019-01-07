@@ -14,6 +14,9 @@
 	<cfargument name = "thisRequest" required="true"/>
 	<cfscript>
 	//writedump(session);
+	if(isDefined("Session.pkTienda")==False){
+		Session.pkTienda=1;
+	}
 	</cfscript>
 </cffunction>
 

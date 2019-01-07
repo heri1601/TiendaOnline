@@ -79,7 +79,7 @@
                     <li><a href="index.cfm">Home</a></li>
                     <li class="active"><a href="shop.html">Shop</a></li>
                     <li><a href="product-details.html">Product</a></li>
-                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="/Cart.cfc?method=init">Cart</a></li>
                     <li><a href="checkout.html">Checkout</a></li>
                 </ul>
             </nav>
@@ -90,7 +90,7 @@
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                <a href="/Cart.cfc?method=init" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
                 <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
             </div>
@@ -253,9 +253,10 @@
                             <div class="product-img">
                                 <cfset myImage=ImageNew("#Request.productos.TPR_IMAGEN[i]#")> 
                                 <cfimage source="#myImage#" action="writeToBrowser" class="img-fluid">
-                                <img src="#Request.productos.TPR_IMAGEN[i]#" alt="">
                                 <!-- Hover Thumb -->
-                                <cfimage source="#myImage#" action="writeToBrowser" class="hover-img img-fluid">
+                                <a href="/Cart.cfc?method=viewProduct&p=#Request.productos.TPR_PK_PRODUCTO[i]#">
+                                <cfimage source="#myImage#" action="writeToBrowser" class="hover-img img-fluid" >
+                                </a>
 
 
                                 <!---<img class="hover-img" src="#Request.productos.TPR_IMAGEN[i]#" alt="">--->
@@ -281,7 +282,7 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div>
                                     <div class="cart">
-                                        <!---/index.cfc?method=addToCart&p=#Request.productos.TPR_PK_PRODUCTO[i]#     <a href="cart.html" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>--->
+                                        <!---/index.cfc?method=addToCart&p=#Request.productos.TPR_PK_PRODUCTO[i]#     <a href="/Cart.cfc?method=init" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>--->
                                         <cfoutput>
                                         <a href="javascript:addToCart(#Request.productos.TPR_PK_PRODUCTO[i]#);" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
                                         </cfoutput>
@@ -374,7 +375,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                             <a class="nav-link" href="product-details.html">Product</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="cart.html">Cart</a>
+                                            <a class="nav-link" href="/Cart.cfc?method=init">Cart</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="checkout.html">Checkout</a>

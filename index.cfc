@@ -25,13 +25,13 @@
         //Selecting the category
         var Request.categoria=act;
         if(Request.categoria==""){
-            Request.categoria=Request.categorias.PK[1];
+            Request.categoria=9;//General
         }
         //writeDump(Request);
 
         var mProductos=CreateObject("component","Administradores/Productos/Model");
 		Request.productos=mProductos.obtenerRegistrosFiltrado(
-                categoria=arguments.act,
+                categoria=Request.categoria,
                 minPrecio=arguments.minPrecio,
                 maxPrecio=arguments.maxPrecio
         );
@@ -42,12 +42,19 @@
     </cffunction>
 
     <cffunction name="addToCart" access="remote">
-    <cfargument name="p" type="string" required="no" default="">
+    <cfargument name="p" type="string" required="yes">
     <cfscript>
+        Session.pkTienda=1;
         Session.cartProduct=cgi.HTTP_REFERER;
         if(isDefined("Session.usuario") EQ False){
-            //writeoutput("redirect");
             writeoutput(SerializeJSON("redirect"));
+        }
+        else{
+            //verifyCartExistance
+            var mCarrito=CreateObject("component","/Models/Cart/model");            
+            var id=mCarrito.addToCart(Session.usuario,p,Session.pkTienda);
+            writeoutput(SerializeJSON("true"));
+            return;
         }
     </cfscript>
     </cffunction>
@@ -65,6 +72,8 @@
         //writedump(arguments);
         if(e=="heri1601@gmail.com"&&p=="123"){
             writeoutput(SerializeJSON("accept"));
+            //Creating user in session
+            Session.usuario=1;
         }
         else{
             writeoutput(SerializeJSON("bad"));
@@ -73,16 +82,8 @@
     </cffunction>
 
     <cffunction name="goProduct" access="remote">
-    <cfargument name="e" type="string" required="no" default="">
-    <cfargument name="p" type="string" required="no" default="">
     <cfscript>
-        //writedump(arguments);
-        if(e=="heri1601@gmail.com"&&p=="123"){
-            writeoutput(SerializeJSON("accept"));
-        }
-        else{
-            writeoutput(SerializeJSON("bad"));
-        }
+        location(Session.cartProduct);        
     </cfscript>
     </cffunction>
 

@@ -17,7 +17,39 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
-
+    <script>
+        function affectProduct(p,sign){
+            var myData = new FormData();
+            var miUrl='/Cart.cfc'
+                myData.append("method","affectProduct")
+                myData.append("p",p)
+                myData.append("sign",sign)
+                $.ajax({
+                    url:miUrl,
+                    type:"POST",
+                    contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                    processData: false, // NEEDED, DON'T OMIT THIS
+                    data:myData,
+                    complete: function (response) {
+                        location.reload(true);
+                        var reposnseObject=eval("("+response.responseText+")");
+                        console.log(reposnseObject);
+                        location.reload(true);
+                        if(reposnseObject==true){
+                            
+                        }
+                        else{
+                            alert("Error al procesar su solicitud. Por favor intentelo nuevamente.");
+                            location.reload(true);
+                        }
+                    },
+                    error: function () {
+                        alert("Error al procesar su solicitud. Por favor intentelo nuevamente.");
+                        location.reload(true);
+                    },
+                });
+        }
+    </script>
 </head>
 
 <body>
@@ -48,7 +80,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="index.cfm"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -64,15 +96,15 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="index.cfm"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="index.cfm">Home</a></li>
+                    <li><a href="/index.cfc?method=initCategorias">Shop</a></li>
                     <li><a href="product-details.html">Product</a></li>
-                    <li class="active"><a href="cart.html">Cart</a></li>
+                    <li class="active"><a href="/Cart.cfc?method=init">Cart</a></li>
                     <li><a href="checkout.html">Checkout</a></li>
                 </ul>
             </nav>
@@ -83,7 +115,7 @@
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                <a href="/Cart.cfc?method=init" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
                 <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
             </div>
@@ -116,69 +148,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="cart_product_img">
-                                            <a href="#"><img src="img/bg-img/cart1.jpg" alt="Product"></a>
-                                        </td>
-                                        <td class="cart_product_desc">
-                                            <h5>White Modern Chair</h5>
-                                        </td>
-                                        <td class="price">
-                                            <span>$130</span>
-                                        </td>
-                                        <td class="qty">
-                                            <div class="qty-btn d-flex">
-                                                <p>Qty</p>
-                                                <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                    <cfloop index="i" from="1" to="#Request.elementosCarrito.recordcount#">
+                                        <cfoutput>
+                                        <tr>
+                                            <td class="cart_product_img">
+                                                <cfset myImage=ImageNew("#Request.elementosCarrito.TPR_IMAGEN[i]#")> 
+                                                <cfimage source="#myImage#" action="writeToBrowser" class="img-fluid">
+                                                <!---<img src="#Request.productos.TPR_IMAGEN[i]#" alt="">--->
+                                                <a href="##"><img src="#Request.elementosCarrito.TPR_IMAGEN[i]#" alt="Product"></a>
+                                            </td>
+                                            <td class="cart_product_desc">
+                                                <h5>#Request.elementosCarrito.TPR_NOMBRE[i]#</h5>
+                                            </td>
+                                            <td class="price">
+                                                <span>$#Request.elementosCarrito.TPR_PRECIO[i]#</span>
+                                            </td>
+                                            <td class="qty">
+                                                <div class="qty-btn d-flex">
+                                                    <p>Qty</p>
+                                                    <div class="quantity">
+                                                        <span class="qty-minus" onclick="affectProduct(#Request.elementosCarrito.TEC_PK_ELEMENTO_CARRITO[i]#,'decrement'); var effect = document.getElementById('qty#i#'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                                        <input type="number" class="qty-text" id="qty#i#" step="1" min="1" max="300" name="quantity" value="#Request.elementosCarrito.TEC_CANTIDAD[i]#">
+                                                        <span class="qty-plus" onclick="affectProduct(#Request.elementosCarrito.TEC_PK_ELEMENTO_CARRITO[i]#,'increment'); var effect = document.getElementById('qty#i#'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false; "><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="cart_product_img">
-                                            <a href="#"><img src="img/bg-img/cart2.jpg" alt="Product"></a>
-                                        </td>
-                                        <td class="cart_product_desc">
-                                            <h5>Minimal Plant Pot</h5>
-                                        </td>
-                                        <td class="price">
-                                            <span>$10</span>
-                                        </td>
-                                        <td class="qty">
-                                            <div class="qty-btn d-flex">
-                                                <p>Qty</p>
-                                                <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty2'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input type="number" class="qty-text" id="qty2" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty2'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="cart_product_img">
-                                            <a href="#"><img src="img/bg-img/cart3.jpg" alt="Product"></a>
-                                        </td>
-                                        <td class="cart_product_desc">
-                                            <h5>Minimal Plant Pot</h5>
-                                        </td>
-                                        <td class="price">
-                                            <span>$10</span>
-                                        </td>
-                                        <td class="qty">
-                                            <div class="qty-btn d-flex">
-                                                <p>Qty</p>
-                                                <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty3'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input type="number" class="qty-text" id="qty3" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty3'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>    
+                                        </cfoutput>
+                                    </cfloop>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -187,12 +185,14 @@
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
-                                <li><span>subtotal:</span> <span>$140.00</span></li>
-                                <li><span>delivery:</span> <span>Free</span></li>
-                                <li><span>total:</span> <span>$140.00</span></li>
+                                <cfoutput>
+                                <li><span>subtotal:</span> <span>$#Request.subtotal#</span></li>
+                                <li><span>delivery:</span> <span>$#Request.delivery#</span></li>
+                                <li><span>total:</span> <span>$#Request.total#</span></li>
+                                </cfoutput>
                             </ul>
                             <div class="cart-btn mt-100">
-                                <a href="cart.html" class="btn amado-btn w-100">Checkout</a>
+                                <a href="/Cart.cfc?method=init" class="btn amado-btn w-100">Checkout</a>
                             </div>
                         </div>
                     </div>
@@ -236,7 +236,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="index.cfm"><img src="img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -254,16 +254,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">Home</a>
+                                            <a class="nav-link" href="index.cfm">Home</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="shop.html">Shop</a>
+                                            <a class="nav-link" href="/index.cfc?method=initCategorias">Shop</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="product-details.html">Product</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="cart.html">Cart</a>
+                                            <a class="nav-link" href="/Cart.cfc?method=init">Cart</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="checkout.html">Checkout</a>
