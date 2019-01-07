@@ -129,7 +129,7 @@ body#LoginForm{ background-image:url("/img/bg.jpg"); background-repeat:no-repeat
 
         </div>
         <div class="forgot">
-        <a href="reset.html">Forgot password?</a>
+        <a href="reset.html">Register for free here</a>
 </div>
         <button type="submit" class="btn btn-primary">Login</button>
 
