@@ -101,9 +101,10 @@
       <a class="navbar-brand" href="https://blackrockdigital.github.io/startbootstrap-freelancer/">Web</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="http://localhost:8502/componente.cfc?method=demoHeaderFooter1">Home</a></li>
-      <li><a href="http://localhost:8502/componente.cfc?method=demoHeaderFooter2">Informaci&oacuten</a></li>
-      <li><a href="http://localhost:8502/componente.cfc?method=demoHeaderFooter3">Tablas de informaci&oacuten</a></li>
+      <li class="active"><a href="/Administradores/Productos/C_Productos.cfc?method=init">Productos</a></li>
+      <li class="active"><a href="/Administradores/Inventarios/C_Inventarios.cfc?method=init">Inventarios</a></li>
+      <li class="active"><a href="/Administradores/Duenos/C_Duenos.cfc?method=init">Due&ntilde;os</a></li>
+      <li class="active"><a href="/Administradores/Categorias/C_Categorias.cfc?method=init">Categorias</a></li>
     </ul>
   </div>
 </nav>
