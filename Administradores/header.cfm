@@ -98,7 +98,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="https://blackrockdigital.github.io/startbootstrap-freelancer/">Web</a>
+      <a class="navbar-brand" href="/index.cfm">Web</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="/Administradores/Productos/C_Productos.cfc?method=init">Productos</a></li>

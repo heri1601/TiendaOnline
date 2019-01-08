@@ -84,7 +84,11 @@
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
-            <a href="/index.cfc?method=login" class="search-nav"><img src="img/core-img/user.png" alt="" width="25px"> Log in</a>
+            <cfif isDefined("Session.usuario") EQ False>
+                <a href="/index.cfc?method=login" class="search-nav"><img src="img/core-img/user.png" alt="" width="25px"> Log in</a>
+            <cfelse>
+                <a href="/index.cfc?method=logout" class="search-nav"><img src="img/core-img/user.png" alt="" width="25px"> Log out</a>
+            </cfif>
                 <a href="/Cart.cfc?method=init" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
                 <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>

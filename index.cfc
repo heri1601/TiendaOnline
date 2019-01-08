@@ -65,15 +65,47 @@
     </cfscript>
     </cffunction>
 
+    <cffunction name="logout" access="remote">
+    <cfscript>
+        structdelete(session, 'usuario', true);
+        location('/index.cfm');
+    </cfscript>
+    </cffunction>
+
     <cffunction name="loginCheck" access="remote">
     <cfargument name="e" type="string" required="no" default="">
     <cfargument name="p" type="string" required="no" default="">
     <cfscript>
         //writedump(arguments);
-        if(e=="heri1601@gmail.com"&&p=="123"){
-            writeoutput(SerializeJSON("accept"));
+        var model=CreateObject("component","/Models/Usuarios/model");            
+        var registroUsuario=model.obtenerRegistroUsuario(e,p);
+        if(registroUsuario.exists){
+            writeoutput(SerializeJSON(registroUsuario.type));
             //Creating user in session
-            Session.usuario=1;
+            Session.usuario=registroUsuario.registro.PK_USUARIO[1];
+            Session.registroUsuario=registroUsuario;
+        }
+        else{
+            writeoutput(SerializeJSON("bad"));
+        }
+    </cfscript>
+    </cffunction>
+
+    <cffunction name="signUp" access="remote">
+    <cfargument name="inNombre" type="string" required="yes">
+    <cfargument name="inApellidos" type="string" required="yes">
+    <cfargument name="e" type="string" required="yes">
+    <cfargument name="p" type="string" required="yes">
+    <cfscript>
+        var model=CreateObject("component","/Models/Usuarios/model");            
+        var registroUsuario=model.registrarUsuario(inNombre,inApellidos,e,p);
+        if(registroUsuario.exists=='error'){
+            writeoutput(SerializeJSON("bad"));
+            return;
+        }
+        if(registroUsuario.registro.recordcount==1){
+            writeoutput(SerializeJSON("ok"));
+            return;
         }
         else{
             writeoutput(SerializeJSON("bad"));
@@ -83,8 +115,17 @@
 
     <cffunction name="goProduct" access="remote">
     <cfscript>
+        if(isDefined('Session.cartProduct'))
         location(Session.cartProduct);        
+        else
+        location('/index.cfm');        
     </cfscript>
+    </cffunction>
+
+    <cffunction name="initSignUp" access="remote">
+        <cfscript>
+            include "/signUp.cfm";
+        </cfscript>
     </cffunction>
 
 </cfcomponent>

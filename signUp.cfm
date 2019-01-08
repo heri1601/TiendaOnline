@@ -63,14 +63,50 @@ body#LoginForm{ background-image:url("/img/bg.jpg"); background-repeat:no-repeat
 
 <script>
   $(document).ready(function(){
+      $("#inputPassword").keyup(function(){
+        var password=$("#inputPassword").val();
+        console.log(password)
+        var confirmPassword=$("#inConfirm").val();    
+        if(password==confirmPassword){
+          $("#inputPassword").attr('style','background-color : #99ff99; ');
+          $("#inConfirm").attr('style','background-color : #99ff99; ');
+        }
+        else{
+          $("#inputPassword").attr('style','background-color : #ff3300; ');
+          $("#inConfirm").attr('style','background-color : #ff3300; ');
+        }
+      });
+
+      $("#inConfirm").keyup(function(){
+        var password=$("#inputPassword").val();
+        console.log(password)
+        var confirmPassword=$("#inConfirm").val();    
+        if(password==confirmPassword){
+          $("#inputPassword").attr('style','background-color : #99ff99; ');
+          $("#inConfirm").attr('style','background-color : #99ff99; ');
+        }
+        else{
+          $("#inputPassword").attr('style','background-color : #ff3300; ');
+          $("#inConfirm").attr('style','background-color : #ff3300; ');
+        }
+      });
     });
   function login(){
+    var nombre=$("#inNombre").val();
+    var apellidos=$("#inApellidos").val();
     var email=$("#inputEmail").val();
     var password=$("#inputPassword").val();
+    var confirmPassword=$("#inConfirm").val();
+    if(password!=confirmPassword){
+      alert("Error, los passwords no coinciden.");
+      return;
+    }
 
     var myData = new FormData();
         var miUrl='/index.cfc'
-            myData.append("method","loginCheck")
+            myData.append("method","signUp")
+      myData.append("inNombre",nombre)
+      myData.append("inApellidos",apellidos)
 			myData.append("e",email)
       myData.append("p",password)
             $.ajax({
@@ -82,16 +118,13 @@ body#LoginForm{ background-image:url("/img/bg.jpg"); background-repeat:no-repeat
                 complete: function (response) {
                     var reposnseObject=eval("("+response.responseText+")");
                     console.log(reposnseObject);
-                    if(reposnseObject=="client"){
+                    if(reposnseObject=="ok"){
+                        alert("Registro exitoso");
                         location.href = "/index.cfc?method=goProduct"
                         return ;
                     }
-                    if(reposnseObject=="admin"){
-                        location.href = "http://localhost:8504/Administradores/Productos/C_Productos.cfc?method=init"
-                        return ;
-                    }
                     if(reposnseObject=="bad"){
-                      alert("Credenciales incorrectas. Acceso denegado.");
+                      alert("No se pudo registrar el usuario. Es posible que la cuenta ya exista.");
                       return ;
                     }
                     
@@ -121,21 +154,25 @@ body#LoginForm{ background-image:url("/img/bg.jpg"); background-repeat:no-repeat
     <form action="javascript:login();" id="Login">
 
         <div class="form-group">
-
-
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email Address">
-
+            <input type="text" class="form-control" id="inNombre" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="inApellidos" placeholder="Apellidos">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
         </div>
 
         <div class="form-group">
-
             <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-
         </div>
-        <div class="forgot">
-        <a href="/index.cfc?method=initSignUp">Register for free here</a>
-</div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <div class="form-group">
+            <input type="password" class="form-control" id="inConfirm" placeholder="Confirm password">
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Sign up</button>
 
     </form>
     </div>
