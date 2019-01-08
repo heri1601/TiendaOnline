@@ -107,12 +107,14 @@
 
     <cffunction  name="obtenerRegistrosFiltrado">
     <cfargument name="categoria" type="string" required="yes">
+    <cfargument name="pkTienda" type="string" required="yes">
     <cfargument name="minPrecio" type="string" required="no" default="">
     <cfargument name="maxPrecio" type="string" required="no" default="">
         <cfscript>
             var daoPersonal=CreateObject("component","/Models/Administradores/Productos/DAO");
             return daoPersonal.obtenerProductosTienda(
                 categoria=arguments.categoria,
+                pkTienda=arguments.pkTienda,
                 minPrecio=arguments.minPrecio,
                 maxPrecio=arguments.maxPrecio
                 );

@@ -81,7 +81,8 @@
                 ECA.TEC_FK_ESTADO>0 AND
                 TCA_FK_ESTADO=1 AND
                 TCA_FK_USUARIO='#pkUsuario#' AND
-                TCA_FK_TIENDA='#pkTienda#'
+                TCA_FK_TIENDA='#pkTienda#' AND
+                TCA_FK_ESTADO_CARRITO=1
 
     </cfquery>
     <cfreturn responseSearch>
@@ -114,4 +115,21 @@
     <cfreturn responseSearch>
 </cffunction>
 
+<cffunction name="actualizarEstadoCarrito" >
+		<cfargument name="pkTienda"   		type="string" required="yes">
+		<cfargument name="pkUsuario"   		type="string" required="yes">
+		<cfscript>
+		</cfscript>
+		<cfquery  datasource="myDatasource" result="resultData">
+			UPDATE TIENDAS.T_CARRITO
+			SET    
+				TCA_FK_ESTADO_CARRITO  ='2'
+			WHERE
+			TCA_FK_TIENDA='#pkTienda#' AND
+			TCA_FK_USUARIO='#pkUsuario#' AND
+			TCA_FK_ESTADO=1 AND
+			TCA_FK_ESTADO_CARRITO='1'
+		</cfquery>
+		<cfreturn resultData.RECORDCOUNT>
+</cffunction>
 </cfcomponent>

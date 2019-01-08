@@ -54,6 +54,16 @@
         return response;
     </cfscript>
 </cffunction>
+
+<cffunction  name="checkout">
+    <cfargument name="pkTienda" type="string">
+    <cfargument name="pkUsuario" type="string">
+    <cfscript>
+        var dao=CreateObject("component","/Models/Cart/DAO");            
+        var response=dao.actualizarEstadoCarrito(pkTienda,pkUsuario);
+        return response;
+    </cfscript>
+</cffunction>
  
 
 </cfcomponent>

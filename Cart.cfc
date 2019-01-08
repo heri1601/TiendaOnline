@@ -33,6 +33,9 @@
     Request.subtotal=carrito.subtotal;
     Request.delivery=carrito.delivery;
     Request.total=carrito.total;
+
+    var model=CreateObject("component","/Models/Administradores/Duenos/Model");
+	Request.usuario=model.obtenerRegistro(Session.usuario);
     var mCart=CreateObject("component","/Models/Cart/model");
     Request.cartCount=0;
     if(isDefined("Session.usuario")){

@@ -38,6 +38,7 @@
         var mProductos=CreateObject("component","/Models/Administradores/Productos/Model");
 		Request.productos=mProductos.obtenerRegistrosFiltrado(
                 categoria=Request.categoria,
+                pkTienda=Session.pkTienda,
                 minPrecio=arguments.minPrecio,
                 maxPrecio=arguments.maxPrecio
         );
@@ -137,6 +138,14 @@
     <cffunction name="initSignUp" access="remote">
         <cfscript>
             include "/signUp.cfm";
+        </cfscript>
+    </cffunction>
+
+    <cffunction name="checkout" access="remote">
+        <cfscript>
+            var mCart=CreateObject("component","/Models/Cart/model");
+            var response=mCart.checkout(Session.pkTienda,Session.usuario);
+            writeoutput(SerializeJSON(response));
         </cfscript>
     </cffunction>
 

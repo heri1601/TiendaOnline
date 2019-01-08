@@ -92,7 +92,6 @@
 			TUS_FK_ESTADO ESTADO
 			FROM TIENDAS.T_USUARIOS
 			WHERE 
-			TUS_FK_TIPO_USUARIO=2 AND
 			TUS_PK_USUARIO='#pkRegistro#'
         </cfquery>
 	<cfreturn registro>

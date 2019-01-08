@@ -199,9 +199,12 @@ ORDER BY PK_ENTIDAD ASC
 
 <cffunction  name="obtenerProductosTienda">
 	<cfargument name="categoria" type="string" required="yes">
+	<cfargument name="pkTienda" type="string" required="yes">
     <cfargument name="minPrecio" type="string" required="no" default="">
     <cfargument name="maxPrecio" type="string" required="no" default="">
 		<cfquery name="resultadoQuery" datasource="myDataSource">
+		
+
 		SELECT 
 			PRO.TPR_PK_PRODUCTO, 
 			PRO.TPR_NOMBRE, 
@@ -210,8 +213,11 @@ ORDER BY PK_ENTIDAD ASC
 			PRO.TPR_IMAGEN, 
 			PRO.TPR_FK_ESTADO, 
 			PRO.TPR_FECHA_REGISTRO
-			FROM TIENDAS.T_PRODUCTOS PRO, TIENDAS.T_CATEGORIAS_PRODUCTOS CPR
+			FROM TIENDAS.T_PRODUCTOS PRO, TIENDAS.T_CATEGORIAS_PRODUCTOS CPR,TIENDAS.T_INVENTARIOS TIN
 			WHERE 
+			TIN.TIN_FK_TIENDA='#pkTienda#' AND
+			TIN.FK_ESTADO=2 AND
+			TIN_FK_PRODUCTO=PRO.TPR_PK_PRODUCTO AND
 			PRO.TPR_FK_ESTADO=2 AND
 			CPR.TCP_FK_ESTADO=2 AND
 			CPR.TCP_FK_PRODUCTO=PRO.TPR_PK_PRODUCTO AND
@@ -222,7 +228,13 @@ ORDER BY PK_ENTIDAD ASC
 			<cfif maxPrecio NEQ "">
 				AND PRO.TPR_PRECIO<='#maxPrecio#'
 			</cfif>
-
+			GROUP BY PRO.TPR_PK_PRODUCTO, 
+			PRO.TPR_NOMBRE, 
+			PRO.TPR_DESCRIPCION, 
+			PRO.TPR_PRECIO, 
+			PRO.TPR_IMAGEN, 
+			PRO.TPR_FK_ESTADO, 
+			PRO.TPR_FECHA_REGISTRO
 			ORDER BY TPR_PK_PRODUCTO DESC
     </cfquery>
 	<cfreturn resultadoQuery>
@@ -247,5 +259,7 @@ ORDER BY PK_ENTIDAD ASC
 			sysdate )
 		</cfquery>
 </cffunction>
+
+
 
 </cfcomponent>

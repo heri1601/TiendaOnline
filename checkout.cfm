@@ -17,7 +17,31 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
-
+    <script>
+        function checkout(p){
+        var myData = new FormData();
+        var miUrl='/index.cfc'
+            myData.append("method","checkout")
+			myData.append("p",p)
+            $.ajax({
+                url:miUrl,
+                type:"POST",
+				contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+    			processData: false, // NEEDED, DON'T OMIT THIS
+				data:myData,
+                complete: function (response) {
+                    var reposnseObject=eval("("+response.responseText+")");
+                    if(reposnseObject=="1"){
+                        alert("Pago registrado. Gracias por su compra.")
+                        location.href = "/index.cfm"
+                    }
+                },
+                error: function () {
+                    alert("Error de conexion. Por favor intentelo nuevamente.");
+                },
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -72,18 +96,20 @@
 
                             <form action="#" method="post">
                                 <div class="row">
+                                <cfoutput>
                                     <div class="col-md-6 mb-3">
-                                        <input type="text" class="form-control" id="first_name" value="" placeholder="First Name" required>
+                                        <input type="text" class="form-control" id="first_name" value="#Request.usuario.NOMBRE#" placeholder="First Name" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <input type="text" class="form-control" id="last_name" value="" placeholder="Last Name" required>
+                                        <input type="text" class="form-control" id="last_name" value="#Request.usuario.APELLIDOS#" placeholder="Last Name" required>
                                     </div>
                                     <div class="col-12 mb-3">
                                         <input type="text" class="form-control" id="company" placeholder="Company Name" value="">
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <input type="email" class="form-control" id="email" placeholder="Email" value="">
+                                        <input type="email" class="form-control" id="email" placeholder="Email" value="#Request.usuario.EMAIL#">
                                     </div>
+                                </cfoutput>
                                     <div class="col-12 mb-3">
                                         <select class="w-100" id="country">
                                         <option value="usa">United States</option>
@@ -129,11 +155,13 @@
                     <div class="col-12 col-lg-4">
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
+                            <cfoutput>
                             <ul class="summary-table">
-                                <li><span>subtotal:</span> <span>$140.00</span></li>
-                                <li><span>delivery:</span> <span>Free</span></li>
-                                <li><span>total:</span> <span>$140.00</span></li>
+                                <li><span>subtotal:</span> <span>$#Request.subtotal#</span></li>
+                                <li><span>delivery:</span> <span>#Request.delivery#</span></li>
+                                <li><span>total:</span> <span>$#Request.total#</span></li>
                             </ul>
+                            </cfoutput>
 
                             <div class="payment-method">
                                 <!-- Cash on delivery -->
@@ -149,7 +177,7 @@
                             </div>
 
                             <div class="cart-btn mt-100">
-                                <a href="#" class="btn amado-btn w-100">Checkout</a>
+                                <a href="javascript:checkout();" class="btn amado-btn w-100">Checkout</a>
                             </div>
                         </div>
                     </div>
