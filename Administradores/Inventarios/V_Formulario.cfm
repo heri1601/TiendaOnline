@@ -29,12 +29,26 @@
 	
 	<label class="control-label col-sm-2">Tienda:</label>
 			<div class="form-group">          
-				<input id="inTienda" type="text" class="form-control" name="inTienda">
+				<select id="inTienda"  class="form-control" name="inTienda">
+					<cfloop index="i" from="1" to="#Request.cTiendas.recordcount#">
+					<cfoutput>
+						<option value="#Request.cTiendas.PK[i]#">#Request.cTiendas.TXT[i]#</option>
+					</cfoutput>
+					</cfloop>
+				</select>
+				<!---<input id="inTienda" type="text" class="form-control" name="inTienda">--->
 			</div>
 
 	<label class="control-label col-sm-2">Producto:</label>
 			<div class="form-group">          
-				<input id="inProducto" type="text" class="form-control" name="inProducto">
+				<select id="inProducto" type="text" class="form-control" name="inProducto">
+					<cfloop index="i" from="1" to="#Request.cProductos.recordcount#">
+					<cfoutput>
+						<option value="#Request.cProductos.PK[i]#">#Request.cProductos.TXT[i]#</option>
+					</cfoutput>
+					</cfloop>
+				</select>
+				<!---<input id="inProducto" type="text" class="form-control" name="inProducto">--->
 			</div>
 
 	<label class="control-label col-sm-2">Cantidad:</label>

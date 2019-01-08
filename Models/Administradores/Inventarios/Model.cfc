@@ -64,4 +64,15 @@
             return daoPersonal.obtenerRegistros();
         </cfscript>
     </cffunction>
+
+    <cffunction  name="obtenerCatalogo" >
+	<cfargument name="tableName">
+	<cfargument name="KeyField">
+	<cfargument name="TextField">
+	<cfargument name="StateField">
+	<cfscript>
+        var daoPersonal=CreateObject("component","/Models/Administradores/Inventarios/DAO");
+        return daoPersonal.obtenerCatalogo(tableName,KeyField,TextField,StateField);
+    </cfscript>
+</cffunction>
 </cfcomponent>

@@ -10,6 +10,8 @@
 
 		var cnPersonal=CreateObject("component","/Models/Administradores/Productos/Model");
 		Request.registros=cnPersonal.obtenerRegistros();
+
+		
 	</cfscript>
 	<cfinclude template="/Administradores/header.cfm">
 	<cfinclude template="/Administradores/Productos/V_Formulario.cfm">

@@ -100,7 +100,7 @@
   		SELECT 
 		  	#KeyField# PK,
 			#TextField#	   TXT
-		FROM #nombreTabla#
+		FROM #tableName#
 		WHERE
 		#StateField# =2
 		ORDER BY #TextField# ASC
