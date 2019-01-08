@@ -2,13 +2,19 @@
     <cffunction name="init" access="remote">
     <cfargument name="tienda" required="no" default="">
     <cfscript>
-        var mCategorias=CreateObject("component","Administradores/Categorias/Model");
+        var mCategorias=CreateObject("component","/Models/Administradores/Categorias/DAO");
 		Request.categorias=mCategorias.obtenerRegistros();
 
-        var mProductos=CreateObject("component","Administradores/Productos/Model");
+        var mProductos=CreateObject("component","/Models/Administradores/Productos/Model");
 		Request.productos=mProductos.obtenerRegistros();
-        //writedump(Request.categorias);
-        //writedump(Request.productos);
+
+        var mCart=CreateObject("component","/Models/Cart/model");
+        Request.cartCount=0;
+        if(isDefined("Session.usuario")){
+		    Request.elementosCarrito=mCart.getCart(Session.usuario,Session.pkTienda);
+            Request.cartCount=Request.elementosCarrito.count;
+        }
+
     </cfscript>
     <cfinclude template="/indexTemplate.cfm">
     </cffunction>
@@ -19,7 +25,7 @@
     <cfargument name="minPrecio" type="string" required="no" default="">
     <cfargument name="maxPrecio" type="string" required="no" default="">
     <cfscript>
-        var mCategorias=CreateObject("component","Administradores/Categorias/Model");
+        var mCategorias=CreateObject("component","/Models/Administradores/Categorias/DAO");
 		Request.categorias=mCategorias.obtenerRegistros();
 
         //Selecting the category
@@ -27,16 +33,22 @@
         if(Request.categoria==""){
             Request.categoria=9;//General
         }
-        //writeDump(Request);
+        
 
-        var mProductos=CreateObject("component","Administradores/Productos/Model");
+        var mProductos=CreateObject("component","/Models/Administradores/Productos/Model");
 		Request.productos=mProductos.obtenerRegistrosFiltrado(
                 categoria=Request.categoria,
                 minPrecio=arguments.minPrecio,
                 maxPrecio=arguments.maxPrecio
         );
-        //writedump(Request.categorias);
-        //writedump(Request.productos);
+        
+        var mCart=CreateObject("component","/Models/Cart/model");
+        Request.cartCount=0;
+        if(isDefined("Session.usuario")){
+		    Request.elementosCarrito=mCart.getCart(Session.usuario,Session.pkTienda);
+            Request.cartCount=Request.elementosCarrito.count;
+        }
+
     </cfscript>
     <cfinclude template="/shop.cfm">
     </cffunction>

@@ -8,7 +8,7 @@
 	<cffunction name="init" access="remote">
 	<cfscript>
 
-		var cnPersonal=CreateObject("component","Administradores/Categorias/Model");
+		var cnPersonal=CreateObject("component","/Models/Administradores/Categorias/Model");
 		Request.registros=cnPersonal.obtenerRegistros();
 	</cfscript>
 	<cfinclude template="/Administradores/header.cfm">
@@ -21,7 +21,7 @@
 		<cfargument name="inNombre"   		type="string" required="yes">
 		<cfargument name="inDescripcion"    type="string"  required="yes">
 	<cfscript>
-		var model=CreateObject("component","Administradores/Categorias/Model");
+		var model=CreateObject("component","/Models/Administradores/Categorias/Model");
 		var pkRegistro=model.Registrar(inNombre,inDescripcion);
 		if(pkRegistro>0)pkRegistro=1;
 		writeoutput(SerializeJSON(pkRegistro));
@@ -34,7 +34,7 @@
 		<cfargument name="inNombre"   		type="string" required="yes">
 		<cfargument name="inDescripcion"    type="string"  required="yes">
 	<cfscript>
-		var model=CreateObject("component","Administradores/Categorias/Model");
+		var model=CreateObject("component","/Models/Administradores/Categorias/Model");
 		var pkRegistro=model.modificar(inPkRegistro,inNombre,inDescripcion);
 		if(pkRegistro>0)pkRegistro=1;
 		writeoutput(SerializeJSON(pkRegistro));
@@ -46,7 +46,7 @@
 		<cfargument name="inPkRegistro"   		type="string" required="yes">
 	<cfscript>
 		//Guardando Imagen en ruta local
-		var model=CreateObject("component","Administradores/Categorias/Model");
+		var model=CreateObject("component","/Models/Administradores/Categorias/Model");
 		var pkRegistro=model.eliminar(inPkRegistro);
 		if(pkRegistro>0)pkRegistro=1;
 		writeoutput(SerializeJSON(pkRegistro));
@@ -57,7 +57,7 @@
 		<cfargument name="inPkRegistro"   		type="string" required="yes">
 	<cfscript>
 		//Guardando Imagen en ruta local
-		var model=CreateObject("component","Administradores/Categorias/Model");
+		var model=CreateObject("component","/Models/Administradores/Categorias/Model");
 		var pkRegistro=model.validar(inPkRegistro);
 		if(pkRegistro>0)pkRegistro=1;
 		writeoutput(SerializeJSON(pkRegistro));
@@ -68,7 +68,7 @@
 		<cfargument name="inPkRegistro"   		type="string" required="yes">
 	<cfscript>
 		//Guardando Imagen en ruta local
-		var model=CreateObject("component","Administradores/Categorias/Model");
+		var model=CreateObject("component","/Models/Administradores/Categorias/Model");
 		var pkRegistro=model.invalidar(inPkRegistro);
 		if(pkRegistro>0)pkRegistro=1;
 		writeoutput(SerializeJSON(pkRegistro));
@@ -84,7 +84,7 @@
 	<cfscript>
 	//writedump(arguments);
 	//FileCopy(archivo,"d:/cosa.txt");
-	var cnPersonal=CreateObject("component","Administradores/Categorias/Model");
+	var cnPersonal=CreateObject("component","/Models/Administradores/Categorias/Model");
 	var pkEmpleado=cnPersonal.preRegistrarExtranjero(Nombre,Edad,Num_Tel,Pais);
 	</cfscript>
 	<cfoutput>#SerializeJSON(pkEmpleado)#</cfoutput>
@@ -98,7 +98,7 @@
             <cfargument name="Pais"		   	type="any">
 	<cfscript>
 	//FileCopy(archivo,"d:/cosa.txt");
-	var cnPersonal=CreateObject("component","Administradores/Categorias/Model");
+	var cnPersonal=CreateObject("component","/Models/Administradores/Categorias/Model");
 	var pkRegistro=cnPersonal.ActualizarRegistroExtranjero(Pk_registro,Nombre,Edad,Num_Tel,Pais);
 	</cfscript>
 	<cfoutput>#SerializeJSON(pkRegistro)#</cfoutput>
@@ -112,7 +112,7 @@
             <cfargument name="Entidad"     type="any">
 	<cfscript>
 	//FileCopy(archivo,"d:/cosa.txt");
-	var cnPersonal = CreateObject("component","Administradores/Categorias/Model");
+	var cnPersonal = CreateObject("component","/Models/Administradores/Categorias/Model");
 	var pkRegistro = cnPersonal.ActualizarRegistroNacional(Pk_registro,Nombre,Edad,Num_Tel,Entidad);
 	</cfscript>
 	<cfoutput>#SerializeJSON(pkRegistro)#</cfoutput>
@@ -122,7 +122,7 @@
 			<cfargument name="pkRegistro"   type="any">
 	<cfscript>
 
-	var cnPersonal=CreateObject("component","Administradores/Categorias/Model");
+	var cnPersonal=CreateObject("component","/Models/Administradores/Categorias/Model");
 	var resultadoQuery=cnPersonal.obtenerRegistro(pkRegistro);
 	</cfscript>
 	<cfoutput>#SerializeJSON(resultadoQuery)#</cfoutput>
@@ -132,7 +132,7 @@
 			<cfargument name="pkRegistro"   type="any">
 	<cfscript>
 
-	var cnPersonal=CreateObject("component","Administradores/Categorias/Model");
+	var cnPersonal=CreateObject("component","/Models/Administradores/Categorias/Model");
 	var informacionRegistro=cnPersonal.obtenerRegistro(pkRegistro);
 	
 	request=StructNew();
@@ -148,7 +148,7 @@
 			<cfargument name="pkRegistro"   type="any">
 	<cfscript>
 	//FileCopy(archivo,"d:/cosa.txt");
-	var cnPersonal=CreateObject("component","Administradores/Categorias/Model");
+	var cnPersonal=CreateObject("component","/Models/Administradores/Categorias/Model");
 	var pkReg = cnPersonal.validar(pkRegistro);
 	</cfscript>
 	<cfoutput>#SerializeJSON(pkReg)#</cfoutput>
@@ -159,7 +159,7 @@
             <cfargument name="Estado"       type="any">
 	<cfscript>
 	//FileCopy(archivo,"d:/cosa.txt");
-	var cnPersonal=CreateObject("component","Administradores/Categorias/Model");
+	var cnPersonal=CreateObject("component","/Models/Administradores/Categorias/Model");
 	var pkReg = cnPersonal.obtenerDelte(pkRegistro,Estado);
 	</cfscript>
 	<cfoutput>#SerializeJSON(pkReg)#</cfoutput>

@@ -72,7 +72,7 @@
                 PRO.TPR_PK_PRODUCTO, 
                 PRO.TPR_NOMBRE, 
                 PRO.TPR_DESCRIPCION, 
-                PRO.TPR_PRECIO, 
+                TO_CHAR(TPR_PRECIO,'99999.99') TPR_PRECIO, 
                 PRO.TPR_IMAGEN
                 FROM TIENDAS.T_ELEMENTO_CARRITO ECA,TIENDAS.T_CARRITO CAR, TIENDAS.T_PRODUCTOS PRO
                 WHERE 
@@ -104,7 +104,7 @@
     <cfquery name="responseSearch" datasource="myDatasource">
             SELECT 
              TPR_PK_PRODUCTO, TPR_NOMBRE, TPR_DESCRIPCION, 
-            TPR_PRECIO, TPR_IMAGEN, TPR_FK_ESTADO, 
+            TO_CHAR(TPR_PRECIO,'99999.99') TPR_PRECIO, TPR_IMAGEN, TPR_FK_ESTADO, 
             TPR_FECHA_REGISTRO
             FROM TIENDAS.T_PRODUCTOS
             WHERE 

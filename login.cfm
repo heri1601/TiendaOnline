@@ -87,7 +87,7 @@ body#LoginForm{ background-image:url("/img/bg.jpg"); background-repeat:no-repeat
                         return ;
                     }
                     if(reposnseObject=="admin"){
-                        location.href = "http://localhost:8504/Administradores/Productos/C_Productos.cfc?method=init"
+                        location.href = "/Administradores/Productos/C_Productos.cfc?method=init"
                         return ;
                     }
                     if(reposnseObject=="bad"){

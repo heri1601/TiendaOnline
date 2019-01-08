@@ -19,6 +19,11 @@
         var elementos=dao.getCart(pkUsuario,pkTienda);
         var response=StructNew();
         response.elementos=elementos;
+        //Calculando cuenta
+        response.count=0;
+        for(i=1;i<=response.elementos.recordcount;i++){
+            response.count+=response.elementos.TEC_CANTIDAD[i];
+        }
         //Calculando totales
         response.subtotal=0.0;
         for(i=1;i<=response.elementos.recordcount;i++){

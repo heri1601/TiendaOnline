@@ -1,6 +1,9 @@
 <cfcomponent>
 <cffunction name="init" access="remote">
     <cfscript>
+    if(!isDefined("Session.usuario")){
+        location('/index.cfc?method=login');
+    }
     //Obtener los elementos actuales del carrito y los totales
     var model=CreateObject("component","/Models/Cart/model");
     var carrito=model.getCart(Session.usuario,Session.pkTienda);
@@ -8,8 +11,35 @@
     Request.subtotal=carrito.subtotal;
     Request.delivery=carrito.delivery;
     Request.total=carrito.total;
-    //writedump(Request);
+    var mCart=CreateObject("component","/Models/Cart/model");
+    Request.cartCount=0;
+    if(isDefined("Session.usuario")){
+        elementosCarrito=mCart.getCart(Session.usuario,Session.pkTienda);
+        Request.cartCount=elementosCarrito.count;
+    }
     include "/cart.cfm";        
+    </cfscript>
+</cffunction>
+
+<cffunction name="initCheckout" access="remote">
+    <cfscript>
+    if(!isDefined("Session.usuario")){
+        location('/index.cfc?method=login');
+    }
+    //Obtener los elementos actuales del carrito y los totales
+    var model=CreateObject("component","/Models/Cart/model");
+    var carrito=model.getCart(Session.usuario,Session.pkTienda);
+    Request.elementosCarrito=carrito.elementos;
+    Request.subtotal=carrito.subtotal;
+    Request.delivery=carrito.delivery;
+    Request.total=carrito.total;
+    var mCart=CreateObject("component","/Models/Cart/model");
+    Request.cartCount=0;
+    if(isDefined("Session.usuario")){
+        elementosCarrito=mCart.getCart(Session.usuario,Session.pkTienda);
+        Request.cartCount=elementosCarrito.count;
+    }
+    include "/checkout.cfm";        
     </cfscript>
 </cffunction>
 
@@ -38,7 +68,6 @@
     <cfscript>
         var model=CreateObject("component","/Models/Cart/model");
         Request.producto=model.getProduct(p);
-        writedump(Request);
         include "product-details.cfm";
     </cfscript>
 </cffunction>

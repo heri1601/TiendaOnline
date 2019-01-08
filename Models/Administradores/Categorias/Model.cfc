@@ -3,7 +3,7 @@
 		<cfargument name="inNombre"   		type="string" required="yes">
 		<cfargument name="inDescripcion"    type="string"  required="yes">
 		<cfscript>
-            var dao =   CreateObject("component","Administradores/Categorias/DAO");
+            var dao =   CreateObject("component","/Models/Administradores/Categorias/DAO");
             var pkRegistro=dao.registrar(inNombre,inDescripcion);
             return pkRegistro;
 		</cfscript>
@@ -12,7 +12,7 @@
     <cffunction  name="obtenerRegistro">
         <cfargument name="pkRegistro"   type="any">
 	    <cfscript>
-            var daoPersonal=CreateObject("component","Administradores/Categorias/DAO");
+            var daoPersonal=CreateObject("component","/Models/Administradores/Categorias/DAO");
             return daoPersonal.obtenerDatosRegistro(pkRegistro);
         </cfscript>
     </cffunction>
@@ -22,7 +22,7 @@
 		<cfargument name="inNombre"   		type="string" required="yes">
 		<cfargument name="inDescripcion"    type="string"  required="yes">
 		<cfscript>
-            var dao =   CreateObject("component","Administradores/Categorias/DAO");
+            var dao =   CreateObject("component","/Models/Administradores/Categorias/DAO");
             var pkRegistro=dao.modificar(inPkRegistro,inNombre,inDescripcion);
             return pkRegistro;
 		</cfscript>
@@ -31,7 +31,7 @@
     <cffunction name="eliminar" access="remote">
         <cfargument name="inPkRegistro"   		type="string" required="yes">
 		<cfscript>
-            var dao =   CreateObject("component","Administradores/Categorias/DAO");
+            var dao =   CreateObject("component","/Models/Administradores/Categorias/DAO");
             var pkRegistro=dao.actualizarEstado(inPkRegistro,0);
             return pkRegistro;
 		</cfscript>
@@ -40,7 +40,7 @@
     <cffunction name="validar" access="remote">
         <cfargument name="inPkRegistro"   		type="string" required="yes">
 		<cfscript>
-            var dao =   CreateObject("component","Administradores/Categorias/DAO");
+            var dao =   CreateObject("component","/Models/Administradores/Categorias/DAO");
             var pkRegistro=dao.actualizarEstado(inPkRegistro,2);
             return pkRegistro;
 		</cfscript>
@@ -49,14 +49,14 @@
     <cffunction name="invalidar" access="remote">
         <cfargument name="inPkRegistro"   		type="string" required="yes">
 		<cfscript>
-            var dao =   CreateObject("component","Administradores/Categorias/DAO");
+            var dao =   CreateObject("component","/Models/Administradores/Categorias/DAO");
             var pkRegistro=dao.actualizarEstado(inPkRegistro,3);
             return pkRegistro;
 		</cfscript>
 	</cffunction>
     <cffunction  name="obtenerRegistros">
         <cfscript>
-            var daoPersonal=CreateObject("component","Administradores/Categorias/DAO");
+            var daoPersonal=CreateObject("component","/Models/Administradores/Categorias/DAO");
             return daoPersonal.obtenerRegistros();
         </cfscript>
     </cffunction>

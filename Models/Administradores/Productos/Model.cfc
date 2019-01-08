@@ -17,7 +17,7 @@
 		<cfargument name="inPrecio"     	type="string"  required="yes">
 		<cfargument name="inImagen"     	type="string"  required="yes">
 		<cfscript>
-            var dao =   CreateObject("component","Administradores/Productos/DAO");
+            var dao =   CreateObject("component","/Models/Administradores/Productos/DAO");
             var pkRegistro=dao.registrar(inNombre,inDescripcion,inPrecio,inImagen);
             return pkRegistro;
 		</cfscript>
@@ -30,7 +30,7 @@
 		<cfargument name="inPrecio"     	type="string"  required="yes">
 		<cfargument name="inImagen"     	type="string"  required="yes">
 		<cfscript>
-            var dao =   CreateObject("component","Administradores/Productos/DAO");
+            var dao =   CreateObject("component","/Models/Administradores/Productos/DAO");
             var pkRegistro=dao.modificar(inPkRegistro,inNombre,inDescripcion,inPrecio,inImagen);
             return pkRegistro;
 		</cfscript>
@@ -39,7 +39,7 @@
     <cffunction name="eliminar" access="remote">
         <cfargument name="inPkRegistro"   		type="string" required="yes">
 		<cfscript>
-            var dao =   CreateObject("component","Administradores/Productos/DAO");
+            var dao =   CreateObject("component","/Models/Administradores/Productos/DAO");
             var pkRegistro=dao.actualizarEstado(inPkRegistro,0);
             return pkRegistro;
 		</cfscript>
@@ -48,7 +48,7 @@
     <cffunction name="validar" access="remote">
         <cfargument name="inPkRegistro"   		type="string" required="yes">
 		<cfscript>
-            var dao =   CreateObject("component","Administradores/Productos/DAO");
+            var dao =   CreateObject("component","/Models/Administradores/Productos/DAO");
             var pkRegistro=dao.actualizarEstado(inPkRegistro,2);
             return pkRegistro;
 		</cfscript>
@@ -57,7 +57,7 @@
     <cffunction name="invalidar" access="remote">
         <cfargument name="inPkRegistro"   		type="string" required="yes">
 		<cfscript>
-            var dao =   CreateObject("component","Administradores/Productos/DAO");
+            var dao =   CreateObject("component","/Models/Administradores/Productos/DAO");
             var pkRegistro=dao.actualizarEstado(inPkRegistro,3);
             return pkRegistro;
 		</cfscript>
@@ -80,7 +80,7 @@
         <cfargument name="Num_Tel"     type="any">
         <cfargument name="Pais"     type="any">
 		<cfscript>
-            var daoPersonal =   CreateObject("component","Administradores/Productos/DAO");
+            var daoPersonal =   CreateObject("component","/Models/Administradores/Productos/DAO");
             daoPersonal.actualizarDatosRegistro(Pk_registro,Nombre,Edad,Num_Tel,0,Pais);
 		</cfscript>
 	</cffunction>
@@ -92,14 +92,14 @@
         <cfargument name="Num_Tel"     type="any">
         <cfargument name="Entidad"     type="any">
 		<cfscript>
-            var daoPersonal =   CreateObject("component","Administradores/Productos/DAO");
+            var daoPersonal =   CreateObject("component","/Models/Administradores/Productos/DAO");
             daoPersonal.actualizarDatosRegistro(Pk_registro,Nombre,Edad,Num_Tel,Entidad,0);
 		</cfscript>
 	</cffunction>
 
     <cffunction  name="obtenerRegistros">
         <cfscript>
-            var daoPersonal=CreateObject("component","Administradores/Productos/DAO");
+            var daoPersonal=CreateObject("component","/Models/Administradores/Productos/DAO");
             return daoPersonal.obtenerRegistros();
         </cfscript>
     </cffunction>
@@ -110,7 +110,7 @@
     <cfargument name="minPrecio" type="string" required="no" default="">
     <cfargument name="maxPrecio" type="string" required="no" default="">
         <cfscript>
-            var daoPersonal=CreateObject("component","Administradores/Productos/DAO");
+            var daoPersonal=CreateObject("component","/Models/Administradores/Productos/DAO");
             return daoPersonal.obtenerProductosTienda(
                 categoria=arguments.categoria,
                 minPrecio=arguments.minPrecio,
@@ -123,7 +123,7 @@
     <cffunction  name="obtenerRegistro">
         <cfargument name="pkRegistro"   type="any">
 	    <cfscript>
-            var daoPersonal=CreateObject("component","Administradores/Productos/DAO");
+            var daoPersonal=CreateObject("component","/Models/Administradores/Productos/DAO");
             return daoPersonal.obtenerDatosRegistro1(pkRegistro);
         </cfscript>
     </cffunction>
@@ -134,7 +134,7 @@
         <cfargument name="pkRegistro"   type="any">
         <cfargument name="Estado"       type="any">
 	    <cfscript>
-            var daoPersonal =   CreateObject("component","Administradores/Productos/DAO");
+            var daoPersonal =   CreateObject("component","/Models/Administradores/Productos/DAO");
             return daoPersonal.obtenerDatosRegistro(pkRegistro,Estado);
         </cfscript>
     </cffunction>
@@ -143,7 +143,7 @@
         <cfargument name="pkRegistro"   type="any">
         <cfargument name="Estado"       type="any">
 	    <cfscript> 
-            var daoPersonal=CreateObject("component","Administradores/Productos/DAO");
+            var daoPersonal=CreateObject("component","/Models/Administradores/Productos/DAO");
             return daoPersonal.obtenerDatosRegistro(pkRegistro,Estado);
         </cfscript>
     </cffunction>
